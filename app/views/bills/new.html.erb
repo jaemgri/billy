@@ -1,0 +1,20 @@
+<h1>Add a New Bill</h1>
+
+<%= form_with model: @bill do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+
+  <%= f.label :amount %>
+  <%= f.number_field :amount %>
+
+  <%= f.label :category %>
+  <%= f.text_field :category %>
+
+  <%= f.label :due_date %>
+  <%= f.date_field :due_date %>
+
+  <%= f.submit "Create Bill" %>
+<% end %>

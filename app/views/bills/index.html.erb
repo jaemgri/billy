@@ -1,0 +1,11 @@
+<h1>My Bills</h1>
+
+<%= link_to "Add a new bill", new_bill_path %>
+
+<% @bills.each do |bill| %>
+  <div>
+    <h3><%= link_to bill.title, bill_path(bill) %></h3>
+    <p><%= bill.category %> — ¥<%= bill.amount %></p>
+    <p>Due: <%= bill.due_date %></p>
+  </div>
+<% end %>
