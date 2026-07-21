@@ -4,8 +4,7 @@
 
 <% @bills.each do |bill| %>
   <div>
-    <h3><%= link_to bill.title, bill_path(bill) %></h3>
-    <p><%= bill.category %> — ¥<%= bill.amount %></p>
-    <p>Due: <%= bill.due_date %></p>
+    <h3><%= link_to bill.name, bill_path(bill) %></h3>
+    <p>¥<%= bill.amount %></p>
   </div>
 <% end %>
