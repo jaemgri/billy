@@ -4,11 +4,5 @@ body {
   display: flex;
   justify-content: center;
   margin: 0;
-}
-
-.mobile-app {
-  width: 100%;
-  max-width: 430px; // Phone width
-  min-height: 100vh;
-  background: white;
+  padding-bottom: 80px;
 }
