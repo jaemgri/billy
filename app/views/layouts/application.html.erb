@@ -21,12 +21,15 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <%# Tells the mobile browser to size the webpage to the actual width of the device screen %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
 
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= yield %>
-    <%= render 'shared/navbar' %>
+      <%= yield %>
+      <%= render 'shared/navbar' %>
   </body>
 </html>
