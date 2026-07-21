@@ -1,1 +1,14 @@
 // Specific CSS for your home-page
+body {
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+
+.mobile-app {
+  width: 100%;
+  max-width: 430px; // Phone width
+  min-height: 100vh;
+  background: white;
+}
