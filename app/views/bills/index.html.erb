@@ -1,10 +1,31 @@
-<h1>My Bills</h1>
+<div class="flex p-3 mt-3" style="height: 90vh;">
 
-<%= link_to "Add a new bill", new_bill_path %>
-
-<% @bills.each do |bill| %>
-  <div>
-    <h3><%= link_to bill.name, bill_path(bill) %></h3>
-    <p>¥<%= bill.amount %></p>
+  <%= month_calendar(events: @bills, attribute: :due_date) do |date, bills| %>
+    <div class="day-number"><%= date.day %></div>
+    <% if bills.size > 0 %>
+      <div><%= bills.size %></div>
+    <% end %>
+<!--
+    <% bills.each do |bill| %>
+      <div class="bill-item">
+        <span><%= bill.name %></span>
+        <span><%= number_to_currency(bill.amount) %></span>
+      </div>
+    <% end %>
+-->
+  <% end %>
+  <div class="d-flex flex-row w-100 justify-content-between p-4">
+    <div>
+      <h4>Due this month:</h4>
+      <% @bills.each do |bill| %>
+        <div>
+          <p><%=bill.name%> <%= bill.category %> — ¥<%= bill.amount %></p>
+        </div>
+      <% end %>
+      <h4>Total: ¥<%= @bills.sum { |bill| bill.amount } %></h4>
+    </div>
+    <div>
+      <%= link_to "＋", new_bill_path, { class: "btn btn-outline-secondary", style: "width: 2em; font-size: 2.5em; border-radius: 8px;"} %>
+    </div>
   </div>
-<% end %>
+</div>

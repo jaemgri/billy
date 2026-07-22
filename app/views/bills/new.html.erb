@@ -4,8 +4,17 @@
   <%= f.label :name %>
   <%= f.text_field :name %>
 
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+
   <%= f.label :amount %>
   <%= f.number_field :amount %>
+
+  <%= f.label :category %>
+  <%= f.text_field :category %>
+
+  <%= f.label :due_date %>
+  <%= f.date_field :due_date %>
 
   <%= f.submit "Create Bill" %>
 <% end %>

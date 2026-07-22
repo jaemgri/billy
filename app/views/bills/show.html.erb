@@ -1,4 +1,7 @@
 <h1><%= @bill.name %></h1>
+<p><%= @bill.description %></p>
 <p>Amount: ¥<%= @bill.amount %></p>
+<p>Category: <%= @bill.category %></p>
+<p>Due: <%= @bill.due_date %></p>
 
 <%= link_to "Back to all bills", bills_path %>

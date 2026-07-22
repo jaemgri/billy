@@ -2,7 +2,10 @@ class BillsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @bills = current_user.bills
+    start_date = params.fetch(:start_date, Date.today).to_date
+    @bills = current_user.bills.where(
+      due_date: start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week
+    )
   end
 
   def show
@@ -15,7 +18,9 @@ class BillsController < ApplicationController
 
   def create
     @bill = current_user.bills.build(bill_params)
-    if @bill.save
+    if @bill.save!
+      @shared_bill = current_user.shared_bills.build(bill_id: @bill.id)
+      @shared_bill.save
       redirect_to bill_path(@bill), notice: "Bill was successfully created."
     else
       render :new, status: :unprocessable_entity
@@ -25,6 +30,6 @@ class BillsController < ApplicationController
   private
 
   def bill_params
-    params.require(:bill).permit(:name, :amount)
+    params.require(:bill).permit(:name, :amount, :description, :due_date, :received_date, :category)
   end
 end
