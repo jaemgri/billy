@@ -1,6 +1,17 @@
 // Specific CSS for your home-page
+:root {
+  --primary-accent: #EA9F39;
+  --secondary-accent: #006798;
+  --dark-accent: #0B2545;
+  --secondary-text: #015366;
+  --text-dark: #2C2624;
+  --card-fill: #E8EDF2;
+  --app-bg: #F3F7F9;
+  --outer-canvas-bg: #ECEAE6;
+}
+
 body {
-  background-color: #f5f5f5;
+  background-color: var(--app-bg);
   display: flex;
   justify-content: center;
   margin: 0;
@@ -10,4 +21,5 @@ body {
 
 h1 {
   font-family: "Figtree", sans-serif;
+  color: var(--text-dark);
 }
