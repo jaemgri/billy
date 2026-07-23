@@ -1,4 +1,4 @@
-// ---- Global body ----
+/ ---- Global body ----
 body {
   background-color: var(--app-bg);
   display: flex;
@@ -6,6 +6,129 @@ body {
   margin: 0;
   padding-bottom: 80px;
   flex-direction: column;
+}
+
+// ---- App header ----
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: var(--app-bg);
+  border-bottom: 1px solid var(--card-container);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--card-container);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--subtitles);
+  font-size: 0.9rem;
+}
+
+.header-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.header-right {
+  display: flex;
+  gap: 16px;
+  color: var(--subtitles);
+  font-size: 1.1rem;
+}
+
+// ---- Bills index layout ----
+.bills-index {
+  padding: 0 16px;
+}
+
+// ---- Calendar container ----
+.cal-container {
+  margin-bottom: 20px;
+}
+
+.cal-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 4px 10px;
+}
+
+.cal-month-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.cal-nav-arrow {
+  color: var(--subtitles);
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 4px 10px;
+
+  &:hover {
+    color: var(--primary-dark);
+  }
+}
+
+// ---- Upcoming bills section ----
+.upcoming-bills-section {
+  margin-top: 2px;
+}
+
+.upcoming-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 12px;
+}
+
+.bill-card{
+    background:white;
+    border-radius:24px;
+    padding:18px 22px;
+    transition:.2s;
+    box-shadow:0 4px 12px rgba(0,0,0,.05);
+}
+
+.bill-card:hover{
+    transform:translateY(-3px);
+}
+
+.bill-icon-circle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--card-container);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--primary-dark);
+  font-size: 1rem;
+}
+
+.bill-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.bill-name {
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
 // ---- App header ----
@@ -130,15 +253,13 @@ body {
   gap: 3px;
 }
 
-.bill-name {
-  font-size: 0.9rem;
-  font-weight: 600;
+.due-date {
   color: var(--text-dark);
 }
 
 .bill-due {
   font-size: 0.78rem;
-  color: var(--subtitles);
+  color: var(--text-dark);
 }
 
 .bill-amount {
@@ -190,4 +311,37 @@ body {
   font-size: 0.85rem;
   color: var(--text-dark);
   margin-bottom: 4px;
+}
+
+.section-title {
+  color: var(--text-dark);
+}
+
+.dashboard-card{
+  background:white;
+  border-radius:28px;
+  padding:28px;
+  box-shadow:
+    0 8px 30px rgba(0,0,0,.06);
+}
+
+.calendar-card{
+    background:white;
+    border-radius:36px;
+    padding:32px;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+.category-pill{
+    background:#EEF5FF;
+    color:#2E5AAC;
+    border-radius:999px;
+    padding:5px 14px;
+    font-size:.8rem;
+    font-weight:600;
+}
+
+.sidebar{
+    background:#FDFCF7;
+    border-radius:36px;
 }
