@@ -8,3 +8,32 @@
 <%= link_to "Edit", edit_bill_path(@bill) %>
 <%= button_to "Ask Billy about this bill", chats_path(bill_id: @bill.id), method: :post, class: "btn-app-primary" %>
 <%= link_to "Delete", bill_path(@bill), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+
+<button
+  data-controller="share"
+  data-share-title-value="<%= @bill.name %>"
+  data-share-text-value="Check out this bill: <%= @bill.name %>"
+  data-share-url-value="<%= bill_url(@bill) %>"
+  data-action="share#share">
+  Share this bill
+</button>
+
+<% if @bill.user == current_user %>
+  <h2>Share this bill</h2>
+  <%= form_with model: [@bill, SharedBill.new] do |f| %>
+    <%= f.email_field :invited_email, placeholder: "person@example.com", required: true %>
+    <%= f.select :role, [["Viewer", "viewer"], ["Commenter", "commenter"], ["Editor", "editor"]] %>
+    <%= f.submit "Share" %>
+  <% end %>
+
+  <h3>Shared with</h3>
+  <ul>
+    <% @bill.shared_bills.each do |sb| %>
+      <li>
+        <%= sb.user&.email || sb.invited_email %> (<%= sb.role %>)<%= " – pending" unless sb.user %>
+        <%= button_to "Remove", [@bill, sb], method: :delete,
+              data: { turbo_confirm: "Remove access?" } %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
