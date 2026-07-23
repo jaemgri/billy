@@ -1,49 +1,62 @@
-<!-- Header-->
+<div class="d-flex flex-column w-100">
+  <!-- Header (Spans full width across top) -->
 
-<!-- Calendar-->
-<div class="flex p-3 mt-3" style="height: 90vh;">
+  <!-- Main Dashboard Container -->
+  <div class="container-fluid p-0">
+    <div class="row g-4" style="min-height: 80vh;">
 
-  <%= month_calendar(events: @bills, attribute: :due_date) do |date, bills| %>
-    <div class="day-number"><%= date.day %></div>
-    <% if bills.size > 0 %>
-      <div><%= bills.size %></div>
-    <% end %>
-<!--
-    <% bills.each do |bill| %>
-      <div class="bill-item">
-        <span><%= bill.name %></span>
-        <span><%= number_to_currency(bill.amount) %></span>
+      <!-- Calendar Column (Left / Main) -->
+      <div class="col-12 col-lg-8">
+        <div class="p-3 border rounded shadow-sm bg-white h-100">
+          <%= month_calendar(events: @bills, attribute: :due_date) do |date, bills| %>
+            <div class="day-number fw-bold"><%= date.day %></div>
+            <% if bills.any? %>
+              <div class="badge bg-danger rounded-pill mt-1">
+                <%= bills.size %> <%= 'bill'.pluralize(bills.size) %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
       </div>
-    <% end %>
--->
-  <% end %>
-<!-- Upcoming Bills/Due this month-->
- <div class="d-flex flex-row w-100 justify-content-between p-4">
-  <div class="w-100">
-    <h5 class="section-title mb-3">Due this month:</h5>
 
-    <% @due_this_month.each do |bill| %>
-      <div class="bill-card mb-2 p-3 border rounded shadow-sm">
-        <div class="d-flex justify-content-between align-items-center">
+      <!-- Upcoming Bills Sidebar Column (Right) -->
+      <div class="col-12 col-lg-4">
+        <div class="p-3 border rounded shadow-sm bg-white h-100 d-flex flex-column justify-content-between">
           <div>
-            <div class="d-flex align-items-center">
-              <span class="bill-name fw-bold"><%= bill.name %></span>
-              <span class="badge bg-secondary ms-2"><%= bill.category %></span>
-            </div>
-            <div class="text-muted small">
-              Due <%= bill.due_date.strftime("%b %d") %>
-            </div>
+            <h5 class="section-title mb-3 fw-bold">Due this month:</h5>
+
+            <% if @due_this_month.any? %>
+              <% @due_this_month.each do |bill| %>
+                <div class="bill-card mb-2 p-3 border rounded shadow-sm">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <div class="d-flex align-items-center">
+                        <span class="bill-name fw-bold"><%= bill.name %></span>
+                        <span class="badge bg-secondary ms-2"><%= bill.category %></span>
+                      </div>
+                      <div class="text-muted small">
+                        Due <%= bill.due_date.strftime("%b %d") %>
+                      </div>
+                    </div>
+                    <div class="fw-bold fs-5">
+                      ¥<%= bill.amount %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <% else %>
+              <p class="text-muted italic">No bills due this month!</p>
+            <% end %>
           </div>
-          <div class="fw-bold fs-5">
-            ¥<%= bill.amount %>
+
+          <!-- Total Calculation Footer -->
+          <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top">
+            <span class="fw-bold fs-5">Total:</span>
+            <span class="fw-bold fs-4 text-primary">¥<%= @due_this_month.sum(&:amount) %></span>
           </div>
         </div>
       </div>
-    <% end %>
 
-    <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top">
-      <span class="fw-bold fs-5">Total:</span>
-      <span class="fw-bold fs-4 text-primary">¥<%= @due_this_month.sum(&:amount) %></span>
     </div>
   </div>
 </div>
