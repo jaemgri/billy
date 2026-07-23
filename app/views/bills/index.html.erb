@@ -19,14 +19,17 @@
     <div>
       <h4>Due this month:</h4>
       <% @due_this_month.each do |bill| %>
-        <div>
-          <p><%= bill.name %> <%= bill.category %> — ¥<%= bill.amount %></p>
+        <div class="bill-card mb-2 p-3 border rounded shadow-sm">
+          <div class="d-flex justify-content-between align-items-center">
+            <p><strong><%= bill.name %></strong>
+            <span class="badge bg-secondary ms-2"><%= bill.category %></span>
+            <div class="fw-bold">
+               ¥<%= bill.amount %></p>
+            </div>
+          </div>
         </div>
       <% end %>
-      <h4>Total: ¥<%= @due_this_month.sum { |bill| bill.amount } %></h4>
-    </div>
-    <div>
-      <%= link_to "＋", new_bill_path, { class: "btn btn-outline-secondary", style: "width: 2em; font-size: 2.5em; border-radius: 8px;"} %>
+      <h3>Total: ¥<%= @due_this_month.sum { |bill| bill.amount } %></h3>
     </div>
   </div>
 </div>
