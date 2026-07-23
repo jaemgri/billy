@@ -1,0 +1,17 @@
+<div class="chat-page">
+  <h2><i class="fa-solid fa-robot"></i> Your Chats with Billy</h2>
+
+  <% if @chats.any? %>
+    <% @chats.each do |chat| %>
+      <%= link_to chat_path(chat), class: "chat-list-item" do %>
+        <div>
+          <strong><%= chat.bill&.title || "General chat" %></strong>
+          <p class="text-muted small"><%= chat.created_at.strftime("%b %d, %Y") %></p>
+        </div>
+        <i class="fa-solid fa-chevron-right"></i>
+      <% end %>
+    <% end %>
+  <% else %>
+    <p class="text-muted">No chats yet — start one from a bill's page!</p>
+  <% end %>
+</div>

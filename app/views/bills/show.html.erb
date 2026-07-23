@@ -5,4 +5,5 @@
 <p>Due: <%= @bill.due_date %></p>
 
 <%= link_to "Back to all bills", bills_path %>
+<%= button_to "Ask Billy about this bill", chats_path(bill_id: @bill.id), method: :post, class: "btn-app-primary" %>
 <%= link_to "Delete", bill_path(@bill), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>

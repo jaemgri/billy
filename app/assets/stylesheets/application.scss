@@ -12,6 +12,16 @@
 @import "pages/index";
 @import "simple_calendar";
 
+.chat-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f7fafc;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  text-decoration: none;
+  color: #2d3748;
 .simple-calendar {
   font-family: inherit;
 }
