@@ -31,6 +31,19 @@ class BillsController < ApplicationController
     end
   end
 
+  def edit
+    @bill = current_user.bills.find(params[:id])
+  end
+
+  def update
+    @bill = current_user.bills.find(params[:id])
+    if @bill.update(bill_params)
+      redirect_to bill_path(@bill), notice: "Bill was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def bill_params
