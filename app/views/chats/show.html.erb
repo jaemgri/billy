@@ -1,6 +1,6 @@
 <div class="chat-page">
   <h2><i class="fa-solid fa-robot"></i> Ask Billy</h2>
-  <p class="text-muted">About: <%= @chat.bill&.title || "General" %></p>
+  <p class="text-muted">About: <%= @chat.bill&.name || "General" %></p>
 
   <div class="chat-messages">
     <% if @messages.any? %>
