@@ -1,0 +1,22 @@
+<h1>Edit Bill</h1>
+
+<%= form_with model: @bill do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+
+  <%= f.label :amount %>
+  <%= f.number_field :amount %>
+
+  <%= f.label :category %>
+  <%= f.text_field :category %>
+
+  <%= f.label :due_date %>
+  <%= f.date_field :due_date %>
+
+  <%= f.submit "Update Bill" %>
+<% end %>
+
+<%= link_to "Back", bill_path(@bill) %>

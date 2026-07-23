@@ -7,7 +7,7 @@ class BillsController < ApplicationController
   end
 
   def show
-    @bill = Bill.find(params[:id])
+    @bill = accessible_bills.find(params[:id])
   end
 
   def new
@@ -15,7 +15,7 @@ class BillsController < ApplicationController
   end
 
   def destroy
-    @bill = current_user.bills.find(params[:id])
+    @bill = current_user.bills.find(params[:id]) # owner-only delete
     @bill.destroy
     redirect_to bills_path, status: :see_other, notice: "Bill was deleted."
   end
@@ -31,9 +31,34 @@ class BillsController < ApplicationController
     end
   end
 
+  def edit
+    @bill = editable_bills.find(params[:id])
+  end
+
+  def update
+    @bill = editable_bills.find(params[:id])
+    if @bill.update(bill_params)
+      redirect_to bill_path(@bill), notice: "Bill was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def bill_params
     params.require(:bill).permit(:name, :amount, :description, :due_date, :received_date, :category)
+  end
+
+  # Owner + anyone the bill is shared with (any role) can view
+  def accessible_bills
+    Bill.where(user: current_user)
+        .or(Bill.where(id: current_user.shared_with_bills.select(:id)))
+  end
+
+  # Owner + editors can edit/update
+  def editable_bills
+    editor_bill_ids = current_user.shared_bills.where(role: :editor).select(:bill_id)
+    Bill.where(user: current_user).or(Bill.where(id: editor_bill_ids))
   end
 end
