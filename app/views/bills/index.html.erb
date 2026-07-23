@@ -9,11 +9,13 @@
       <div class="col-12 col-lg-8">
         <div class="p-3 border rounded shadow-sm bg-white h-100">
           <%= month_calendar(events: @bills, attribute: :due_date) do |date, bills| %>
-            <div class="day-number fw-bold"><%= date.day %></div>
-            <% if bills.any? %>
-              <div class="badge bg-danger rounded-pill mt-1">
-                <%= bills.size %> <%= 'bill'.pluralize(bills.size) %>
-              </div>
+            <%= link_to "/bills/date/#{date}", { class: "text-decoration-none" } do %>
+              <div class="day-number fw-bold"><%= date.day %></div>
+              <% if bills.any? %>
+                <div class="badge bg-danger rounded-pill mt-1">
+                  <%= bills.size %> <%= 'bill'.pluralize(bills.size) %>
+                </div>
+              <% end %>
             <% end %>
           <% end %>
         </div>

@@ -44,6 +44,11 @@ class BillsController < ApplicationController
     end
   end
 
+  def date
+    @target_date = params[:date]
+    @bills = current_user.bills.where(due_date: params[:date])
+  end
+
   private
 
   def bill_params
