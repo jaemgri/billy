@@ -35,7 +35,7 @@
                         <span class="badge bg-secondary ms-2"><%= bill.category %></span>
                       </div>
                       <div class="text-muted small">
-                        Due <%= bill.due_date.strftime("%b %d") %>
+                        Due <%= bill.due_date.strftime("%b %d") %> (<%= (bill.due_date - Date.today).to_i %> days)
                       </div>
                     </div>
                     <div class="fw-bold fs-5">
