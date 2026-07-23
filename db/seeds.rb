@@ -12,7 +12,7 @@ cassandra = User.create!(email: "cassandra@example.com", password: "password", n
 
 puts "Creating bills for James..."
 rent = Bill.create!(
-  title: "Rent",
+  name: "Rent",
   description: "Monthly apartment rent",
   amount: 90000,
   due_date: Date.today + 10,
@@ -22,7 +22,7 @@ rent = Bill.create!(
 )
 
 electricity = Bill.create!(
-  title: "Electricity",
+  name: "Electricity",
   description: "TEPCO monthly bill",
   amount: 8200,
   due_date: Date.today + 5,
@@ -32,7 +32,7 @@ electricity = Bill.create!(
 )
 
 internet = Bill.create!(
-  title: "Internet",
+  name: "Internet",
   description: "Fiber broadband",
   amount: 5400,
   due_date: Date.today + 15,
@@ -43,7 +43,7 @@ internet = Bill.create!(
 
 puts "Creating bills for Nina..."
 groceries = Bill.create!(
-  title: "Groceries",
+  name: "Groceries",
   description: "Weekly shopping",
   amount: 12000,
   due_date: Date.today + 3,
