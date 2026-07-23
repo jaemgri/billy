@@ -84,7 +84,7 @@ body {
 
 // ---- Upcoming bills section ----
 .upcoming-bills-section {
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 .upcoming-title {
@@ -133,12 +133,16 @@ body {
 .bill-name {
   font-size: 0.9rem;
   font-weight: 600;
+  color: var(--primary-dark);
+}
+
+.due-date {
   color: var(--text-dark);
 }
 
 .bill-due {
   font-size: 0.78rem;
-  color: var(--subtitles);
+  color: var(--text-dark);
 }
 
 .bill-amount {
@@ -190,4 +194,8 @@ body {
   font-size: 0.85rem;
   color: var(--text-dark);
   margin-bottom: 4px;
+}
+
+.section-title {
+  color: var(--text-dark);
 }

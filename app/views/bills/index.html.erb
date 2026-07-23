@@ -34,8 +34,10 @@
                         <span class="bill-name fw-bold"><%= bill.name %></span>
                         <span class="badge bg-secondary ms-2"><%= bill.category %></span>
                       </div>
-                      <div class="text-muted small">
-                        Due <%= bill.due_date.strftime("%b %d") %>
+                      <div class="bill-due">
+                        <div class="text-muted small">
+                          Due <%= bill.due_date.strftime("%b %d") %>
+                        </div>
                       </div>
                     </div>
                     <div class="fw-bold fs-5">
