@@ -1,0 +1,23 @@
+<div class="chat-page">
+  <h2><i class="fa-solid fa-robot"></i> Ask Billy</h2>
+  <p class="text-muted">About: <%= @chat.bill&.title || "General" %></p>
+
+  <div class="chat-messages">
+    <% if @messages.any? %>
+      <% @messages.each do |message| %>
+        <div class="chat-bubble <%= message.role %>">
+          <%= message.content %>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="chat-bubble assistant">
+        Hi! I'm Billy. Ask me anything about this bill.
+      </div>
+    <% end %>
+  </div>
+
+  <div class="chat-input-bar">
+    <input type="text" placeholder="Type your message..." disabled>
+    <button disabled><i class="fa-solid fa-paper-plane"></i></button>
+  </div>
+</div>
