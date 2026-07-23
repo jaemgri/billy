@@ -1,24 +1,29 @@
 // Define variables for your color scheme
 
-// For example:
-:root {
-  /* Primary & Dark Colors */
-  --primary-dark: #084F59;
-  --main-accent: #0073B7;
-  --dark-secondary-buttons: #082B4C
+$primary-dark: #084F59;
+$main-accent: #0073B7;
+$dark-secondary-buttons: #082B4C;
 
-  /* secondary and Accent colors */
-  --category-icons: #EAA638;
-  --calendar-selected-date: #F3BF65
+$category-icons: #EAA638;
+$calendar-selected-date: #F3BF65;
 
-   /* Backgrounds */
-   --app-bg: #F8F9FB;
-   --card-container: #EEF2F5;
-   --input-field: #E6EEF3;
-   --outer-canvas-bg: #EAE8E1;
+$app-bg: #F8F9FB;
+$card-container: #EEF2F5;
+$input-field: #E6EEF3;
+$outer-canvas-bg: #EAE8E1;
 
-   /* Text & Lines */
-   --text-dark: #1E2B37;
-   --subtitles: #6B7A8D;
-   --border: #95B2C7;
-}
+$text-dark: #1E2B37;
+$subtitles: #6B7A8D;
+$border: #95B2C7;
+
+// Bootstrap-expected variable names
+$light-gray: $app-bg;
+$gray: $subtitles;
+$blue: $main-accent;
+$green: #28a745;
+$yellow: #ffc107;
+$red: #dc3545;
+$orange: #fd7e14;
+
+$body-font: "Inter", sans-serif;
+$headers-font: "Inter", sans-serif;

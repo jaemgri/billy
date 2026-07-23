@@ -44,6 +44,12 @@ class BillsController < ApplicationController
     end
   end
 
+  def toggle_paid
+    @bill = current_user.bills.find(params[:id])
+    @bill.update(paid: !@bill.paid)
+    redirect_to bill_path(@bill)
+  end
+
   private
 
   def bill_params

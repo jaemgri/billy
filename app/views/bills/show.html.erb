@@ -8,3 +8,9 @@
 <%= link_to "Edit", edit_bill_path(@bill) %>
 <%= button_to "Ask Billy about this bill", chats_path(bill_id: @bill.id), method: :post, class: "btn-app-primary" %>
 <%= link_to "Delete", bill_path(@bill), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+<% if @bill.paid? %>
+  <span class="badge bg-success">Paid</span>
+<% else %>
+  <span class="badge bg-danger">Unpaid</span>
+<% end %>
+<%= button_to (@bill.paid? ? "Mark as Unpaid" : "Mark as Paid"), toggle_paid_bill_path(@bill), method: :patch %>
