@@ -5,3 +5,4 @@
 <p>Due: <%= @bill.due_date %></p>
 
 <%= link_to "Back to all bills", bills_path %>
+<%= link_to "Delete", bill_path(@bill), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>

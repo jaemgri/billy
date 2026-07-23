@@ -16,6 +16,12 @@ class BillsController < ApplicationController
     @bill = Bill.new
   end
 
+  def destroy
+    @bill = current_user.bills.find(params[:id])
+    @bill.destroy
+    redirect_to bills_path, status: :see_other, notice: "Bill was deleted."
+  end
+
   def create
     @bill = current_user.bills.build(bill_params)
     if @bill.save!
