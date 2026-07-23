@@ -14,15 +14,16 @@
     <% end %>
 -->
   <% end %>
+
   <div class="d-flex flex-row w-100 justify-content-between p-4">
     <div>
       <h4>Due this month:</h4>
-      <% @bills.each do |bill| %>
+      <% @due_this_month.each do |bill| %>
         <div>
-          <p><%=bill.name%> <%= bill.category %> — ¥<%= bill.amount %></p>
+          <p><%= bill.name %> <%= bill.category %> — ¥<%= bill.amount %></p>
         </div>
       <% end %>
-      <h4>Total: ¥<%= @bills.sum { |bill| bill.amount } %></h4>
+      <h4>Total: ¥<%= @due_this_month.sum { |bill| bill.amount } %></h4>
     </div>
     <div>
       <%= link_to "＋", new_bill_path, { class: "btn btn-outline-secondary", style: "width: 2em; font-size: 2.5em; border-radius: 8px;"} %>
