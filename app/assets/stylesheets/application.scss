@@ -11,3 +11,66 @@
 @import "components/index";
 @import "pages/index";
 @import "simple_calendar";
+
+.simple-calendar {
+  font-family: inherit;
+}
+
+.calendar-heading {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #2d3748;
+}
+
+.calendar-heading a {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #6a73e6;
+  text-decoration: none;
+  margin-left: 8px;
+}
+
+.simple-calendar table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 4px;
+}
+
+.simple-calendar thead th {
+  background: transparent;
+  color: #a0aec0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 8px 0;
+  border: none;
+  text-align: center;
+}
+
+.simple-calendar td.day {
+  background: #f7fafc;
+  border-radius: 10px;
+  height: 70px;
+  vertical-align: top;
+  padding: 8px;
+  border: none;
+  transition: background 0.2s ease;
+}
+
+.simple-calendar td.day.past {
+  opacity: 0.5;
+}
+
+.simple-calendar td.day.today {
+  background: #eef2ff;
+  border: 2px solid #6a73e6;
+}
+
+.day-number {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #2d3748;
+  margin-bottom: 4px;
+}
