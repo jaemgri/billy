@@ -5,7 +5,7 @@
     <% @chats.each do |chat| %>
       <%= link_to chat_path(chat), class: "chat-list-item" do %>
         <div>
-          <strong><%= chat.bill&.title || "General chat" %></strong>
+          <strong><%= chat.bill&.name || "General chat" %></strong>
           <p class="text-muted small"><%= chat.created_at.strftime("%b %d, %Y") %></p>
         </div>
         <i class="fa-solid fa-chevron-right"></i>
