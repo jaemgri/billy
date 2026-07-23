@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "bills#index"
-  resources :bills
+  resources :bills do
+    resources :shared_bills, only: [:create, :destroy]
+  end
   resources :chats, only: [:index, :show, :create]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

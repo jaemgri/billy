@@ -1,0 +1,8 @@
+<p>Hi,</p>
+<p><%= @bill.user.email %> shared a bill with you on Billy: <strong><%= @bill.name %></strong>.</p>
+<p>Your access level: <%= @shared_bill.role %>.</p>
+<% if @shared_bill.user %>
+  <p><%= link_to "View the bill", bill_url(@bill) %></p>
+<% else %>
+  <p>Sign up with this email address to see it: <%= link_to "Create an account", new_user_registration_url %></p>
+<% end %>
