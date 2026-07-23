@@ -1,20 +1,36 @@
-<h1>Add a New Bill</h1>
+<div class="new-bill-page">
+  <h1 class="new-bill-title">Add a New Bill</h1>
 
-<%= form_with model: @bill do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+  <%= form_with model: @bill, id: "new-bill-form" do |f| %>
+    <div class="new-bill-form-card">
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-input" %>
+      </div>
 
-  <%= f.label :description %>
-  <%= f.text_area :description %>
+      <div class="form-group">
+        <%= f.label :description %>
+        <%= f.text_area :description, class: "form-input" %>
+      </div>
 
-  <%= f.label :amount %>
-  <%= f.number_field :amount %>
+      <div class="form-group">
+        <%= f.label :amount %>
+        <%= f.number_field :amount, class: "form-input" %>
+      </div>
 
-  <%= f.label :category %>
-  <%= f.text_field :category %>
+      <div class="form-group">
+        <%= f.label :category %>
+        <%= f.text_field :category, class: "form-input" %>
+      </div>
 
-  <%= f.label :due_date %>
-  <%= f.date_field :due_date %>
+      <div class="form-group">
+        <%= f.label :due_date %>
+        <%= f.date_field :due_date, class: "form-input" %>
+      </div>
+    </div>
 
-  <%= f.submit "Create Bill" %>
-<% end %>
+    <button type="button" class="btn-upload-bill">Upload a bill/bills (AI)...</button>
+
+    <%= f.submit "Submit...", class: "btn-submit-bill" %>
+  <% end %>
+</div>

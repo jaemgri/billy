@@ -1,0 +1,94 @@
+// ---- Add a New Bill page ----
+.new-bill-page {
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.new-bill-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 8px;
+}
+
+.new-bill-form-card {
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: #fff;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--subtitles);
+  }
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  background: var(--input-field);
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  outline: none;
+  box-sizing: border-box;
+
+  &:focus {
+    border-color: var(--main-accent);
+  }
+}
+
+textarea.form-input {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.btn-upload-bill {
+  width: 100%;
+  padding: 18px 20px;
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  background: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  cursor: pointer;
+  text-align: center;
+  margin-top: 16px;
+
+  &:hover {
+    background: var(--card-container);
+  }
+}
+
+.btn-submit-bill {
+  display: block;
+  width: fit-content;
+  margin: 12px auto 0;
+  padding: 12px 40px;
+  border: 2px solid var(--border);
+  border-radius: 999px;
+  background: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  cursor: pointer;
+  margin-bottom: 16px;
+
+  &:hover {
+    background: var(--card-container);
+  }
+}
