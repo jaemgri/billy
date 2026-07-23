@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_23_111707) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_23_114958) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -79,7 +79,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_23_111707) do
     t.string "invited_email"
     t.string "role"
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.index ["bill_id"], name: "index_shared_bills_on_bill_id"
     t.index ["user_id"], name: "index_shared_bills_on_user_id"
   end
