@@ -94,20 +94,16 @@ body {
   margin-bottom: 12px;
 }
 
-.bill-card {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  background: #fff;
-  border-radius: 14px;
-  padding: 14px 16px;
-  margin-bottom: 10px;
-  text-decoration: none;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+.bill-card{
+    background:white;
+    border-radius:24px;
+    padding:18px 22px;
+    transition:.2s;
+    box-shadow:0 4px 12px rgba(0,0,0,.05);
+}
 
-  &:hover {
-    box-shadow: 0 3px 10px rgba(0,0,0,0.10);
-  }
+.bill-card:hover{
+    transform:translateY(-3px);
 }
 
 .bill-icon-circle {
@@ -198,4 +194,33 @@ body {
 
 .section-title {
   color: var(--text-dark);
+}
+
+.dashboard-card{
+  background:white;
+  border-radius:28px;
+  padding:28px;
+  box-shadow:
+    0 8px 30px rgba(0,0,0,.06);
+}
+
+.calendar-card{
+    background:white;
+    border-radius:36px;
+    padding:32px;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+.category-pill{
+    background:#EEF5FF;
+    color:#2E5AAC;
+    border-radius:999px;
+    padding:5px 14px;
+    font-size:.8rem;
+    font-weight:600;
+}
+
+.sidebar{
+    background:#FDFCF7;
+    border-radius:36px;
 }

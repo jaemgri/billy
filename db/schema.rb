@@ -80,6 +80,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_23_114958) do
     t.string "role"
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.index ["bill_id", "invited_email"], name: "index_shared_bills_on_bill_id_and_invited_email", unique: true, where: "(invited_email IS NOT NULL)"
+    t.index ["bill_id", "user_id"], name: "index_shared_bills_on_bill_id_and_user_id", unique: true, where: "(user_id IS NOT NULL)"
     t.index ["bill_id"], name: "index_shared_bills_on_bill_id"
     t.index ["user_id"], name: "index_shared_bills_on_user_id"
   end
