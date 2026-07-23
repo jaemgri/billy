@@ -73,3 +73,5 @@ group :test do
 end
 gem "devise"
 gem "simple_calendar"
+
+gem "letter_opener", group: :development
