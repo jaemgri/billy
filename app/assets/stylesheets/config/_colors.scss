@@ -2,12 +2,21 @@
 
 // For example:
 :root {
-  /* Brand colors */
-  --primary-color: #3b82f6;
-  --secondary-color: #10b981;
+  /* Primary & Dark Colors */
+  --primary-dark: #084F59;
+  --main-accent: #0073B7;
+  --dark-secondary-buttons: #082B4C
 
-  /* Neutrals */
-  --bg-color: #ffffff;
-  --text-color: #1f2937;
-  --card-bg: #f3f4f6;
+  /* secondary and Accent colors */
+  --category-icons: #EAA638;
+  --calendar-selected-date: #F3BF65
+
+   /* Backgrounds */
+   --app-bg: #F8F9FB;
+   --card-container: #EEF2F5;
+   --input-field: #E6EEF3;
+   --outer-canvas-bg: #EAE8E1;
+
+   /* Text & Lines */
+   --
 }
