@@ -1,6 +1,33 @@
 // Define variables for your color scheme
 
 // For example:
+
+// Primary & Dark Accents
+$primary-teal:    #084F59;
+$primary-blue:    #0073B7;
+$dark-navy:       #082B4C;
+$blue:            #084F59;
+$green:           #008000;
+$yellow:          #F3BF65;
+$red:             #FF2C2C;
+$orange:          #FF5900;
+
+// Secondary & Accent Colors
+$accent-amber:    #EAA638;
+$amber-soft:      #F3BF65;
+
+// Neutral / Background Colors
+$light-gray:      #F8F9FB; // Main app background
+$card-bg:         #EEF2F5; // Containers / cards
+$input-bg:        #E6EEF3; // Form fields / modals
+$canvas-bg:       #EAE8E1; // Outer page background
+$gray:            #E6EEF3;
+
+// Typography & Borders
+$text-dark:       #1E2B37; // Titles and main text
+$text-muted:      #6B7A8D; // Secondary / placeholder text
+$border-color:    #95B2C7; // Stroke / border outline
+
 :root {
   /* Primary & Dark Colors */
   --primary-dark: #084F59;

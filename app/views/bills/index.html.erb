@@ -1,3 +1,6 @@
+<!-- Header-->
+
+<!-- Calendar-->
 <div class="flex p-3 mt-3" style="height: 90vh;">
 
   <%= month_calendar(events: @bills, attribute: :due_date) do |date, bills| %>
@@ -14,19 +17,33 @@
     <% end %>
 -->
   <% end %>
+<!-- Upcoming Bills/Due this month-->
+ <div class="d-flex flex-row w-100 justify-content-between p-4">
+  <div class="w-100">
+    <h5 class="section-title mb-3">Due this month:</h5>
 
-  <div class="d-flex flex-row w-100 justify-content-between p-4">
-    <div>
-      <h4>Due this month:</h4>
-      <% @due_this_month.each do |bill| %>
-        <div>
-          <p><%= bill.name %> <%= bill.category %> — ¥<%= bill.amount %></p>
+    <% @due_this_month.each do |bill| %>
+      <div class="bill-card mb-2 p-3 border rounded shadow-sm">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <div class="d-flex align-items-center">
+              <span class="bill-name fw-bold"><%= bill.name %></span>
+              <span class="badge bg-secondary ms-2"><%= bill.category %></span>
+            </div>
+            <div class="text-muted small">
+              Due <%= bill.due_date.strftime("%b %d") %>
+            </div>
+          </div>
+          <div class="fw-bold fs-5">
+            ¥<%= bill.amount %>
+          </div>
         </div>
-      <% end %>
-      <h4>Total: ¥<%= @due_this_month.sum { |bill| bill.amount } %></h4>
-    </div>
-    <div>
-      <%= link_to "＋", new_bill_path, { class: "btn btn-outline-secondary", style: "width: 2em; font-size: 2.5em; border-radius: 8px;"} %>
+      </div>
+    <% end %>
+
+    <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top">
+      <span class="fw-bold fs-5">Total:</span>
+      <span class="fw-bold fs-4 text-primary">¥<%= @due_this_month.sum(&:amount) %></span>
     </div>
   </div>
 </div>
