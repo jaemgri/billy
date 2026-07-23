@@ -2,10 +2,8 @@ class BillsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    start_date = params.fetch(:start_date, Date.today).to_date
-    @bills = current_user.bills.where(
-      due_date: start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week
-    )
+    @bills = current_user.bills
+    @due_this_month = current_user.bills.where(due_date: Date.today.beginning_of_month..Date.today.end_of_month)
   end
 
   def show
@@ -14,6 +12,12 @@ class BillsController < ApplicationController
 
   def new
     @bill = Bill.new
+  end
+
+  def destroy
+    @bill = current_user.bills.find(params[:id])
+    @bill.destroy
+    redirect_to bills_path, status: :see_other, notice: "Bill was deleted."
   end
 
   def create
