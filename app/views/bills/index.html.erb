@@ -27,41 +27,27 @@
 
             <% if @due_this_month.any? %>
               <% @due_this_month.each do |bill| %>
-<<<<<<< HEAD
-                <div class="bill-card mb-2 p-3 border rounded shadow-sm">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                      <div class="d-flex align-items-center">
-                        <span class="bill-name fw-bold"><%= bill.name %></span>
-                        <span class="category-pill"><%= bill.category %></span>
-                      </div>
-                      <div class="bill-due">
-                        <div class="text-muted small">
-                          Due <%= bill.due_date.strftime("%b %d") %>
-                        </div>
-=======
                 <%= link_to bill_path(bill), { class: "text-decoration-none" } do %>
                   <div class="bill-card mb-2 p-3 border rounded shadow-sm">
                     <div class="d-flex justify-content-between align-items-center w-100">
                       <div>
                         <div class="d-flex align-items-center">
                           <span class="bill-name fw-bold"><%= bill.name %></span>
-                          <span class="badge bg-secondary ms-2"><%= bill.category %></span>
+                          <span class="category-pill ms-2"><%= bill.category %></span>
                         </div>
-                        <div class="text-muted small">
+                        <div class="text-muted small mt-1">
                           Due <%= bill.due_date.strftime("%b %d") %> (<%= (bill.due_date - Date.today).to_i %> days)
                         </div>
                       </div>
-                      <div class="fw-bold fs-5">
+                      <div class="fw-bold fs-5 text-dark">
                         ¥<%= bill.amount %>
->>>>>>> 0b99d8dfa97609947768dd6d425ae7838b0aa3aa
                       </div>
                     </div>
                   </div>
                 <% end %>
               <% end %>
             <% else %>
-              <p class="text-muted italic">No bills due this month!</p>
+              <p class="text-muted fst-italic">No bills due this month!</p>
             <% end %>
           </div>
 

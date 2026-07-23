@@ -1,4 +1,4 @@
-/ ---- Global body ----
+
 body {
   background-color: var(--app-bg);
   display: flex;
@@ -85,6 +85,7 @@ body {
 // ---- Upcoming bills section ----
 .upcoming-bills-section {
   margin-top: 2px;
+}
 
 .upcoming-title {
   font-size: 1rem;
@@ -125,15 +126,12 @@ body {
   gap: 3px;
 }
 
-<<<<<<< HEAD
 .bill-name {
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--primary-dark);
 }
 
-=======
->>>>>>> 0b99d8dfa97609947768dd6d425ae7838b0aa3aa
 .due-date {
   color: var(--text-dark);
 }
