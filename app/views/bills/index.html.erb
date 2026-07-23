@@ -27,22 +27,24 @@
 
             <% if @due_this_month.any? %>
               <% @due_this_month.each do |bill| %>
-                <div class="bill-card mb-2 p-3 border rounded shadow-sm">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                      <div class="d-flex align-items-center">
-                        <span class="bill-name fw-bold"><%= bill.name %></span>
-                        <span class="badge bg-secondary ms-2"><%= bill.category %></span>
+                <%= link_to bill_path(bill), { class: "text-decoration-none" } do %>
+                  <div class="bill-card mb-2 p-3 border rounded shadow-sm">
+                    <div class="d-flex justify-content-between align-items-center w-100">
+                      <div>
+                        <div class="d-flex align-items-center">
+                          <span class="bill-name fw-bold"><%= bill.name %></span>
+                          <span class="badge bg-secondary ms-2"><%= bill.category %></span>
+                        </div>
+                        <div class="text-muted small">
+                          Due <%= bill.due_date.strftime("%b %d") %> (<%= (bill.due_date - Date.today).to_i %> days)
+                        </div>
                       </div>
-                      <div class="text-muted small">
-                        Due <%= bill.due_date.strftime("%b %d") %> (<%= (bill.due_date - Date.today).to_i %> days)
+                      <div class="fw-bold fs-5">
+                        ¥<%= bill.amount %>
                       </div>
-                    </div>
-                    <div class="fw-bold fs-5">
-                      ¥<%= bill.amount %>
                     </div>
                   </div>
-                </div>
+                <% end %>
               <% end %>
             <% else %>
               <p class="text-muted italic">No bills due this month!</p>
