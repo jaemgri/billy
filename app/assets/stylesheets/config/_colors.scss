@@ -1,10 +1,13 @@
 // Define variables for your color scheme
 
 // For example:
-$red: #FD1015;
-$blue: #0D6EFD;
-$yellow: #FFC65A;
-$orange: #E67E22;
-$green: #1EDD88;
-$gray: #0E0000;
-$light-gray: #F4F4F4;
+:root {
+  /* Brand colors */
+  --primary-color: #3b82f6;
+  --secondary-color: #10b981;
+
+  /* Neutrals */
+  --bg-color: #ffffff;
+  --text-color: #1f2937;
+  --card-bg: #f3f4f6;
+}
