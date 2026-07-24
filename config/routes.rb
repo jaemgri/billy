@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "bills#index"
+  post 'bills/extract_from_image', to: 'bills#extract_from_image'
   resources :bills do
     resources :shared_bills, only: [:create, :destroy]
   end
