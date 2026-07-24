@@ -1,37 +1,43 @@
-<div class="new-bill-page">
+<div class="new-bill-page" data-controller="bill-upload">
   <h1 class="new-bill-title">Add a New Bill</h1>
 
   <%= form_with model: @bill, id: "new-bill-form" do |f| %>
     <div class="new-bill-form-card">
       <div class="form-group">
         <%= f.label :name %>
-        <%= f.text_field :name, class: "form-input" %>
+        <%= f.text_field :name, class: "form-input", data: { "bill-upload-target": "nameField" } %>
       </div>
 
       <div class="form-group">
         <%= f.label :description %>
-        <%= f.text_area :description, class: "form-input" %>
+        <%= f.text_area :description, class: "form-input", data: { "bill-upload-target": "descriptionField" } %>
       </div>
 
       <div class="form-group">
         <%= f.label :amount %>
-        <%= f.number_field :amount, class: "form-input" %>
+        <%= f.number_field :amount, class: "form-input", data: { "bill-upload-target": "amountField" } %>
       </div>
 
       <div class="form-group">
         <%= f.label :category %>
-        <%= f.text_field :category, class: "form-input" %>
+        <%= f.text_field :category, class: "form-input", data: { "bill-upload-target": "categoryField" } %>
       </div>
 
       <div class="form-group">
         <%= f.label :due_date %>
-        <%= f.date_field :due_date, class: "form-input" %>
+        <%= f.date_field :due_date, class: "form-input", data: { "bill-upload-target": "dueDateField" } %>
       </div>
     </div>
+    <input type="file" accept="image/*" class="d-none"
+           data-bill-upload-target="fileInput"
+           data-action="change->bill-upload#upload">
 
-    <button type="button" class="btn-upload-bill">Upload a bill/bills (AI)...</button>
-    
+    <button type="button" class="btn-upload-bill"
+            data-bill-upload-target="button"
+            data-action="click->bill-upload#trigger">
+      Upload a bill and let AI fill this in
+    </button>
 
-    <%= f.submit "Submit...", class: "btn-submit-bill" %>
+    <%= f.submit "Submit", class: "btn-submit-bill" %>
   <% end %>
 </div>
