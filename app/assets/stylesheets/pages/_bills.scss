@@ -69,9 +69,11 @@ textarea.form-input {
   text-align: center;
   margin-top: 20px;
   margin-bottom: 20px;
+  transition: background 0.2s, color 0.2s;
 
   &:hover {
-    background: var(--card-container);
+    background: var(--border);
+    color: #fff;
   }
 }
 
@@ -89,8 +91,11 @@ textarea.form-input {
   cursor: pointer;
   text-align: center;
 
+  transition: background 0.2s, color 0.2s;
+
   &:hover {
-    background: var(--card-container);
+    background: var(--border);
+    color: #fff;
   }
 
   &:active {

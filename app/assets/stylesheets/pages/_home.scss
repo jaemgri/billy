@@ -186,6 +186,11 @@ body {
   color: var(--text-dark);
 }
 
+.day {
+  max-width: 40px;
+  min-width: 40px;
+}
+
 .day-number {
   font-weight: 600;
   font-size: 0.85rem;
@@ -200,7 +205,6 @@ body {
 .dashboard-card{
   background:white;
   border-radius:28px;
-  padding:28px;
   box-shadow:
     0 8px 30px rgba(0,0,0,.06);
 }
@@ -208,7 +212,7 @@ body {
 .calendar-card{
     background:white;
     border-radius:36px;
-    padding:32px;
+    margin:10px;
     box-shadow:0 10px 30px rgba(0,0,0,.06);
 }
 
