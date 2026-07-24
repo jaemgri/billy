@@ -12,8 +12,8 @@
             <%= link_to "/bills/date/#{date}", { class: "text-decoration-none" } do %>
               <div class="day-number fw-bold"><%= date.day %></div>
               <% if bills.any? %>
-                <div class="badge bg-danger rounded-pill mt-1">
-                  <%= bills.size %> <%= 'bill'.pluralize(bills.size) %>
+                <div class="badge bg-danger rounded-pill mt-1" style="margin-left: 6px;">
+                  <%= bills.size %>
                 </div>
               <% end %>
             <% end %>
@@ -23,7 +23,7 @@
 
       <!-- Upcoming Bills Sidebar Column (Right) -->
       <div class="col-12 col-lg-4">
-        <div class="p-3 dashboard-card h-100 d-flex flex-column justify-content-between">
+        <div class="m-2 dashboard-card h-100 d-flex flex-column justify-content-between">
           <div>
             <h5 class="section-title mb-3 fw-bold">Due this month:</h5>
 
