@@ -172,12 +172,12 @@ body {
   margin-bottom: 14px;
 
   transition: .25s ease;
-}
 
   &:hover {
     transform: translateY(-3px);
     border-color: var(--main-accent);
   }
+}
 
 
 .bill-name {
