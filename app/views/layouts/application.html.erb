@@ -29,8 +29,12 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-      <%= render 'shared/header_bar' %>
-      <%= yield %>
+    <%= render 'shared/header_bar' %>
+
+    <%= yield %>
+
+    <% if user_signed_in? %>
       <%= render 'shared/navbar' %>
+    <% end %>
   </body>
 </html>
