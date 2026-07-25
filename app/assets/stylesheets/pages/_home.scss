@@ -173,7 +173,6 @@ body {
 
   transition: .25s ease;
 
-
   &:hover {
     transform: translateY(-3px);
     border-color: var(--main-accent);
@@ -299,6 +298,9 @@ body {
   font-size: .9rem;
 
   margin: 20px 0;
+
+}
+
 .dashboard-bill-card {
   transition: all .25s ease;
 
@@ -475,6 +477,9 @@ body {
     transform: translateY(-4px);
     border-color: var(--main-accent);
     box-shadow: 0 12px 24px rgba(0,0,0,.08);
+  }
+}
+
 .header-right {
   display: flex;
   align-items: center;
