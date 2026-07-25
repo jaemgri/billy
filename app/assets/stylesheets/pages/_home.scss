@@ -324,7 +324,7 @@ body {
   color: white;
   padding: 18px;
   border-radius: 28px;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
 
   h2 {
@@ -342,5 +342,41 @@ body {
   strong {
     font-size: 1.2rem;
     color: white;
+  }
+}
+
+// Design for the view as date page
+
+.empty-state {
+  background: white;
+  border: 2px dashed var(--border);
+  border-radius: 24px;
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--subtitles);
+
+  i {
+    font-size: 3rem;
+    color: var(--main-accent);
+    margin-bottom: 16px;
+  }
+
+  h4 {
+    color: var(--text-dark);
+    margin-bottom: 8px;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+.dashboard-bill-card {
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: var(--main-accent);
+    box-shadow: 0 12px 24px rgba(0,0,0,.08);
   }
 }
