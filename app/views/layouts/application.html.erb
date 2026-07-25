@@ -27,7 +27,6 @@
   </head>
 
   <body>
-
     <% if notice.present? %>
       <div class="flash flash-notice">
         <%= notice %>
@@ -43,6 +42,5 @@
     <%= render "shared/header_bar" %>
     <%= yield %>
     <%= render "shared/navbar" %>
-
   </body>
 </html>
