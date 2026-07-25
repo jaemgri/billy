@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { registrations: "users/registrations" }
   root to: "bills#index"
   post 'bills/extract_from_image', to: 'bills#extract_from_image'
   resources :bills do

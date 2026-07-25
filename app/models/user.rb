@@ -18,6 +18,11 @@ class User < ApplicationRecord
 
   after_create :claim_pending_shared_bills
 
+  def update_without_password(params, *options)
+    params.delete(:current_password)
+    super
+  end
+
   private
 
   def claim_pending_shared_bills
