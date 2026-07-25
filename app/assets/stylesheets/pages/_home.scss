@@ -1,15 +1,14 @@
 
+
 body {
-  background-color: var(--app-bg);
-  display: flex;
-  justify-content: center;
   margin: 0;
+  background-color: var(--app-bg);
   padding-bottom: 80px;
-  flex-direction: column;
 }
 
 // ---- App header ----
 .app-header {
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
