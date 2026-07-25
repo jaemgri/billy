@@ -1,66 +1,113 @@
-<div class="d-flex flex-column w-100">
-  <!-- Header (Spans full width across top) -->
+<div class="container py-1">
 
-  <!-- Main Dashboard Container -->
-  <div class="container-fluid p-0">
-    <div class="row g-4" style="min-height: 80vh;">
+  <div class="row g-2">
 
-      <!-- Calendar Column (Left / Main) -->
-      <div class="col-12 col-lg-8">
-        <div class="calendar-card">
-          <%= month_calendar(events: @bills, attribute: :due_date) do |date, bills| %>
-            <%= link_to "/bills/date/#{date}", { class: "text-decoration-none" } do %>
-              <div class="day-number fw-bold"><%= date.day %></div>
-              <% if bills.any? %>
-                <div class="badge bg-danger rounded-pill mt-1" style="margin-left: 6px;">
-                  <%= bills.size %>
-                </div>
-              <% end %>
-            <% end %>
-          <% end %>
-        </div>
+    <div class="dashboard-summary">
+      <div>
+        <h2>Hello👋</h2>
+        <p>You have <strong><%= @due_this_month.count %></strong> bill(s) due this month.</p>
       </div>
+    </div>
 
-      <!-- Upcoming Bills Sidebar Column (Right) -->
-      <div class="col-12 col-lg-4">
-        <div class="m-2 dashboard-card h-100 d-flex flex-column justify-content-between">
-          <div>
-            <h5 class="section-title mb-3 fw-bold">Due this month:</h5>
+    <!-- Calendar -->
+    <div class="col-12 col-lg-8">
 
-            <% if @due_this_month.any? %>
-              <% @due_this_month.each do |bill| %>
-                <%= link_to bill_path(bill), { class: "text-decoration-none" } do %>
-                  <div class="bill-card mb-2 p-3 border rounded shadow-sm">
-                    <div class="d-flex justify-content-between align-items-center w-100">
-                      <div>
-                        <div class="d-flex align-items-center">
-                          <span class="bill-name fw-bold"><%= bill.name %></span>
-                          <span class="category-pill ms-2"><%= bill.category %></span>
-                        </div>
-                        <div class="text-muted small mt-1">
-                          Due <%= bill.due_date.strftime("%b %d") %> (<%= (bill.due_date - Date.today).to_i %> days)
-                        </div>
-                      </div>
-                      <div class="fw-bold fs-5 text-dark">
-                        ¥<%= bill.amount %>
-                      </div>
-                    </div>
-                  </div>
-                <% end %>
-              <% end %>
-            <% else %>
-              <p class="text-muted fst-italic">No bills due this month!</p>
+      <div class="calendar-card">
+
+        <%= month_calendar(events: @bills, attribute: :due_date) do |date, bills| %>
+
+          <%= link_to "/bills/date/#{date}", class: "calendar-day text-decoration-none" do %>
+
+            <div class="day-number"><%= date.day %></div>
+
+            <% if bills.any? %>
+              <div class="calendar-badge">
+                <%= bills.size %>
+              </div>
             <% end %>
-          </div>
 
-          <!-- Total Calculation Footer -->
-          <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top">
-            <span class="fw-bold fs-5">Total:</span>
-            <span class="fw-bold fs-4 text-primary">¥<%= @due_this_month.sum(&:amount) %></span>
-          </div>
-        </div>
+          <% end %>
+
+        <% end %>
+
       </div>
 
     </div>
+
+    <!-- Bills -->
+    <div class="col-12 col-lg-4">
+
+      <div class="dashboard-card">
+
+        <div class="dashboard-header">
+          <h3>💸 Due This Month</h3>
+          <span><%= @due_this_month.count %> Bill(s)</span>
+        </div>
+
+        <% if @due_this_month.any? %>
+
+          <% @due_this_month.each do |bill| %>
+
+            <%= link_to bill_path(bill), class: "text-decoration-none" do %>
+
+              <div class="dashboard-bill-card">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                  <div>
+
+                    <div class="d-flex align-items-center gap-2">
+
+                      <span class="bill-name">
+                        <%= bill.name %>
+                      </span>
+
+                      <span class="category-pill">
+                        <%= bill.category %>
+                      </span>
+
+                    </div>
+
+                    <small>
+                      Due <%= bill.due_date.strftime("%b %d") %>
+                    </small>
+
+                  </div>
+
+                  <div class="bill-price">
+                    <%= number_to_currency(bill.amount.to_i, unit: "¥", precision: 0) %>
+                  </div>
+
+                </div>
+
+              </div>
+
+            <% end %>
+
+          <% end %>
+
+        <% else %>
+
+          <div class="empty-state">
+            🎉 No bills due this month!
+          </div>
+
+        <% end %>
+
+        <div class="dashboard-total">
+
+          <span>Total Due</span>
+
+          <strong>
+            <%= number_to_currency(@due_this_month.sum(&:amount), unit: "¥", precision: 0) %>
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
+
 </div>
