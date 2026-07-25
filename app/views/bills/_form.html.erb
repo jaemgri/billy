@@ -2,27 +2,27 @@
     <div class="new-bill-form-card">
       <div class="form-group">
         <%= f.label :name %>
-        <%= f.text_field :name, class: "form-input" %>
+        <%= f.text_field :name, class: "form-input", data: { "bill-upload-target": "nameField" } %>
       </div>
 
       <div class="form-group">
         <%= f.label :description %>
-        <%= f.text_area :description, class: "form-input" %>
+        <%= f.text_area :description, class: "form-input", data: { "bill-upload-target": "descriptionField" } %>
       </div>
 
       <div class="form-group">
         <%= f.label :amount %>
-        <%= f.number_field :amount, class: "form-input" %>
+        <%= f.number_field :amount, class: "form-input", data: { "bill-upload-target": "amountField" } %>
       </div>
 
       <div class="form-group">
         <%= f.label :category %>
-        <%= f.text_field :category, class: "form-input" %>
+        <%= f.text_field :category, class: "form-input", data: { "bill-upload-target": "categoryField" } %>
       </div>
 
       <div class="form-group">
         <%= f.label :due_date %>
-        <%= f.date_field :due_date, class: "form-input" %>
+        <%= f.date_field :due_date, class: "form-input", data: { "bill-upload-target": "dueDateField" } %>
       </div>
     </div>
 
