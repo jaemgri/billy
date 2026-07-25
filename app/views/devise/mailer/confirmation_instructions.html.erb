@@ -1,5 +1,37 @@
-<p>Welcome <%= @email %>!</p>
+<div style="font-family: Arial, Helvetica, sans-serif; max-width: 600px; margin: 0 auto; padding: 32px; color: #333;">
 
-<p>You can confirm your account email through the link below:</p>
+  <h1 style="margin-bottom: 8px;">Welcome to Billy! 👋</h1>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+  <p>Hi <strong><%= @email %></strong>,</p>
+
+  <p>
+    Thanks for creating your Billy account! Before you can start tracking your bills,
+    please confirm your email address.
+  </p>
+
+  <p style="text-align: center; margin: 32px 0;">
+    <%= link_to "Confirm My Email",
+      confirmation_url(@resource, confirmation_token: @token),
+      style: "
+        display:inline-block;
+        padding:14px 28px;
+        background:#F4A261;
+        color:#ffffff;
+        text-decoration:none;
+        border-radius:999px;
+        font-weight:bold;
+      " %>
+  </p>
+
+  <p>
+    If you didn't create a Billy account, you can safely ignore this email.
+  </p>
+
+  <hr style="margin: 32px 0; border: none; border-top: 1px solid #e5e5e5;">
+
+  <p style="color:#777; font-size:14px;">
+    Thanks,<br>
+    <strong>The Billy Team</strong>
+  </p>
+
+</div>
