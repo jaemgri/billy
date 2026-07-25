@@ -2,16 +2,6 @@
 
   <div class="bill-header">
     <h1 class="new-bill-title"><%= @bill.name %></h1>
-
-    <button
-      class="share-btn"
-      data-controller="share"
-      data-share-title-value="<%= @bill.name %>"
-      data-share-text-value="Check out this bill: <%= @bill.name %>"
-      data-share-url-value="<%= bill_url(@bill) %>"
-      data-action="share#share">
-      <i class="fa-solid fa-share-nodes"></i>
-    </button>
   </div>
 
   <div class="new-bill-form-card">
