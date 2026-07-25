@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center m-3">
-  <h2>Bills due on: <%= @target_date %></h2>
+  <h2>📅 Bills Due</h2>
 </div>
 <% @bills.each do |bill| %>
   <%= link_to bill_path(bill), { class: "text-decoration-none" } do %>
