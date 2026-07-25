@@ -6,7 +6,7 @@
     <% if @messages.any? %>
       <% @messages.each do |message| %>
         <div class="chat-bubble <%= message.role %>">
-          <%= message.content %>
+          <%= raw(render_markdown(message.content)) %>
         </div>
       <% end %>
     <% else %>
@@ -16,8 +16,8 @@
     <% end %>
   </div>
 
-  <div class="chat-input-bar">
-    <input type="text" placeholder="Type your message..." disabled>
-    <button disabled><i class="fa-solid fa-paper-plane"></i></button>
-  </div>
+  <%= form_with url: chat_messages_path(@chat), method: :post, class: "chat-input-bar" do |f| %>
+      <%= f.text_field :content, placeholder: "Type your message...", required: true, autocomplete: "off" %>
+      <%= f.submit "➤" %>
+  <% end %>
 </div>
