@@ -27,15 +27,22 @@
   </head>
 
   <body>
-  <% if notice.present? %>
-    <p class="notice"><%= notice %></p>
-  <% end %>
 
-  <% if alert.present? %>
-    <p class="alert"><%= alert %></p>
-  <% end %>
-      <%= render 'shared/header_bar' %>
-      <%= yield %>
-      <%= render 'shared/navbar' %>
+    <% if notice.present? %>
+      <div class="flash notice">
+        <%= notice %>
+      </div>
+    <% end %>
+
+    <% if alert.present? %>
+      <div class="flash alert">
+        <%= alert %>
+      </div>
+    <% end %>
+
+    <%= render "shared/header_bar" %>
+    <%= yield %>
+    <%= render "shared/navbar" %>
+
   </body>
 </html>

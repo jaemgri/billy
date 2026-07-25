@@ -1,6 +1,45 @@
-.alert {
+.flash {
   position: fixed;
-  bottom: 16px;
-  right: 16px;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 1000;
+
+  min-width: 320px;
+  max-width: 90%;
+
+  padding: 14px 22px;
+  border-radius: 18px;
+
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+
+  animation: slideDown 0.3s ease;
+}
+
+.flash.notice {
+  background: #eafaf1;
+  color: #198754;
+  border: 2px solid #b7e4c7;
+}
+
+.flash.alert {
+  background: #fff3f3;
+  color: #dc3545;
+  border: 2px solid #f5c2c7;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
 }
