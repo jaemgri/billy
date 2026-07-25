@@ -1,18 +1,17 @@
 
+
 body {
-  background-color: var(--app-bg);
-  display: flex;
-  justify-content: center;
   margin: 0;
+  background-color: var(--app-bg);
   padding-bottom: 80px;
-  flex-direction: column;
 }
 
 // ---- App header ----
 .app-header {
+  margin: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   padding: 12px 20px;
   background: var(--app-bg);
   border-bottom: 1px solid var(--card-container);
@@ -378,5 +377,44 @@ body {
     transform: translateY(-4px);
     border-color: var(--main-accent);
     box-shadow: 0 12px 24px rgba(0,0,0,.08);
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  form {
+    margin: 0;
+  }
+}
+
+.header-signout-btn {
+  background: transparent;
+  color: #dc3545;
+  border: 2px solid #dc3545;
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  &:hover {
+    background: #dc3545;
+    color: white;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+.navbar-username {
+  color: var(--text-dark);
+  font-weight: 600;
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--main-accent);
   }
 }
