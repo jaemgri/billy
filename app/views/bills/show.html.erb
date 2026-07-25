@@ -1,39 +1,136 @@
-<h1><%= @bill.name %></h1>
-<p><%= @bill.description %></p>
-<p>Amount: ¥<%= @bill.amount %></p>
-<p>Category: <%= @bill.category %></p>
-<p>Due: <%= @bill.due_date %></p>
+<div class="new-bill-page">
 
-<%= link_to "Back to all bills", bills_path %>
-<%= link_to "Edit", edit_bill_path(@bill) %>
-<%= button_to "Ask Billy about this bill", chats_path(bill_id: @bill.id), method: :post, class: "btn-app-primary" %>
-<%= link_to "Delete", bill_path(@bill), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+  <div class="bill-header">
+    <h1 class="new-bill-title"><%= @bill.name %></h1>
 
-<button
-  data-controller="share"
-  data-share-title-value="<%= @bill.name %>"
-  data-share-text-value="Check out this bill: <%= @bill.name %>"
-  data-share-url-value="<%= bill_url(@bill) %>"
-  data-action="share#share">
-  Share this bill
-</button>
+    <button
+      class="share-btn"
+      data-controller="share"
+      data-share-title-value="<%= @bill.name %>"
+      data-share-text-value="Check out this bill: <%= @bill.name %>"
+      data-share-url-value="<%= bill_url(@bill) %>"
+      data-action="share#share">
+      <i class="fa-solid fa-share-nodes"></i>
+    </button>
+  </div>
 
-<% if @bill.user == current_user %>
-  <h2>Share this bill</h2>
-  <%= form_with model: [@bill, SharedBill.new] do |f| %>
-    <%= f.email_field :invited_email, placeholder: "person@example.com", required: true %>
-    <%= f.select :role, [["Viewer", "viewer"], ["Commenter", "commenter"], ["Editor", "editor"]] %>
-    <%= f.submit "Share" %>
+  <div class="new-bill-form-card">
+
+    <div class="form-group">
+      <label>Description</label>
+      <p class="bill-value">
+        <%= @bill.description.presence || "No description" %>
+      </p>
+    </div>
+
+    <div class="form-group">
+      <label>Amount</label>
+      <h2 class="bill-amount">¥<%= @bill.amount %></h2>
+    </div>
+
+    <div class="form-group">
+      <label>Category</label>
+      <p class="bill-value"><%= @bill.category %></p>
+    </div>
+
+    <div class="form-group">
+      <label>Due Date</label>
+      <p class="bill-value">
+        <%= @bill.due_date.strftime("%B %d, %Y") %>
+      </p>
+    </div>
+
+  </div>
+
+  <%= button_to "💬 Ask Billy",
+      chats_path(bill_id: @bill.id),
+      method: :post,
+      class: "btn-submit-bill" %>
+
+  <div class="action-buttons">
+
+    <%= link_to edit_bill_path(@bill), class: "action-btn" do %>
+      <i class="fa-solid fa-pen"></i>
+      <span>Edit</span>
+    <% end %>
+
+    <%= link_to bills_path, class: "action-btn" do %>
+      <i class="fa-solid fa-arrow-left"></i>
+      <span>Back</span>
+    <% end %>
+
+    <%= link_to bill_path(@bill),
+      data: {
+        turbo_method: :delete,
+        turbo_confirm: "Delete this bill?"
+      },
+      class: "action-btn delete" do %>
+
+      <i class="fa-solid fa-trash"></i>
+      <span>Delete</span>
+    <% end %>
+
+  </div>
+
+  <% if @bill.user == current_user %>
+
+    <div class="new-bill-form-card">
+
+      <h2 class="section-title">Share Bill</h2>
+
+      <%= form_with model: [@bill, SharedBill.new] do |f| %>
+
+        <div class="form-group">
+          <%= f.label :invited_email, "Email" %>
+          <%= f.email_field :invited_email,
+                placeholder: "person@example.com",
+                class: "form-input" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :role %>
+          <%= f.select :role,
+                [["Viewer","viewer"],
+                 ["Commenter","commenter"],
+                 ["Editor","editor"]],
+                {},
+                class: "form-input" %>
+        </div>
+
+        <%= f.submit "Invite", class: "btn-submit-bill" %>
+
+      <% end %>
+
+    </div>
+
+    <div class="new-bill-form-card">
+
+      <h2 class="section-title">Shared With</h2>
+
+      <% @bill.shared_bills.each do |sb| %>
+
+        <div class="shared-user">
+
+          <div>
+            <strong><%= sb.user&.email || sb.invited_email %></strong><br>
+            <small>
+              <%= sb.role.capitalize %>
+              <%= " • Pending" unless sb.user %>
+            </small>
+          </div>
+
+          <%= button_to "",
+                [@bill, sb],
+                method: :delete,
+                class: "remove-btn fa-solid fa-xmark",
+                data: { turbo_confirm: "Remove access?" } %>
+
+        </div>
+
+      <% end %>
+
+    </div>
+
   <% end %>
 
-  <h3>Shared with</h3>
-  <ul>
-    <% @bill.shared_bills.each do |sb| %>
-      <li>
-        <%= sb.user&.email || sb.invited_email %> (<%= sb.role %>)<%= " – pending" unless sb.user %>
-        <%= button_to "Remove", [@bill, sb], method: :delete,
-              data: { turbo_confirm: "Remove access?" } %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
+</div>
