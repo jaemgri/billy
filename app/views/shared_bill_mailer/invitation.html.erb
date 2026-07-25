@@ -1,5 +1,14 @@
-<h1>SharedBill#invitation</h1>
+<h1>You've been invited to view a bill on Billy!</h1>
+
+<p><%= @bill.user.email %> shared a bill with you.</p>
+
+<div style="background: #f7fafc; border-radius: 12px; padding: 16px; margin: 20px 0;">
+  <h2 style="margin: 0 0 8px;"><%= @bill.name %></h2>
+  <p style="margin: 0;">Amount: ¥<%= @bill.amount %></p>
+  <p style="margin: 0;">Due: <%= @bill.due_date %></p>
+  <p style="margin: 0;">Category: <%= @bill.category %></p>
+</div>
 
 <p>
-  <%= @greeting %>, find me in app/views/shared_bill_mailer/invitation.html.erb
+  <%= link_to "View this bill on Billy", bill_url(@bill) %>
 </p>
