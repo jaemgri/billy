@@ -29,13 +29,13 @@
   <body>
 
     <% if notice.present? %>
-      <div class="flash notice">
+      <div class="flash flash-notice">
         <%= notice %>
       </div>
     <% end %>
 
     <% if alert.present? %>
-      <div class="flash alert">
+      <div class="flash flash-error">
         <%= alert %>
       </div>
     <% end %>
