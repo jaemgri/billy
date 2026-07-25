@@ -3,7 +3,7 @@
   <div class="page-header">
     <h1 class="new-bill-title">Edit Your Account ⚙️</h1>
     <p class="page-subtitle">
-      Update your name, email, or password.
+      Update your username, email, or password.
     </p>
   </div>
 
@@ -79,7 +79,7 @@
       Danger Zone
     </h3>
 
-    <%= button_to "Cancel my account",
+    <%= button_to "Permanently delete my account",
         registration_path(resource_name),
         method: :delete,
         data: { turbo_confirm: "Are you sure?" },
