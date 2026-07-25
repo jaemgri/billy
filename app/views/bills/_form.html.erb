@@ -24,6 +24,17 @@
         <%= f.label :due_date %>
         <%= f.date_field :due_date, class: "form-input", data: { "bill-upload-target": "dueDateField" } %>
       </div>
+
+      <div class="form-group-toggle">
+        <div>
+          <span class="toggle-label">Paid</span>
+          <span class="toggle-sublabel">Mark this bill as paid</span>
+        </div>
+        <label class="toggle-switch">
+          <%= f.check_box :paid, class: "toggle-input" %>
+          <span class="toggle-track"></span>
+        </label>
+      </div>
     </div>
 
     <% if use_image %>
