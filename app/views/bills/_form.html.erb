@@ -1,0 +1,42 @@
+<%= form_with model: bill, id: "new-bill-form" do |f| %>
+    <div class="new-bill-form-card">
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-input" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :description %>
+        <%= f.text_area :description, class: "form-input" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :amount %>
+        <%= f.number_field :amount, class: "form-input" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :category %>
+        <%= f.text_field :category, class: "form-input" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :due_date %>
+        <%= f.date_field :due_date, class: "form-input" %>
+      </div>
+    </div>
+
+    <% if use_image %>
+      <input type="file" accept="image/*" class="d-none"
+            data-bill-upload-target="fileInput"
+            data-action="change->bill-upload#upload">
+
+      <button type="button" class="btn-upload-bill"
+              data-bill-upload-target="button"
+              data-action="click->bill-upload#trigger">
+        Upload a bill and let AI fill this in
+      </button>
+    <% end %>
+
+    <%= f.submit "Submit", class: "btn-submit-bill mt-3" %>
+  <% end %>
