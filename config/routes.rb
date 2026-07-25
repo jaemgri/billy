@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :bills do
     resources :shared_bills, only: [:create, :destroy]
   end
-  resources :chats, only: [:index, :show, :create]
+  resources :chats, only: [:index, :new, :show, :create]
   get "bills/date/:date" => "bills#date", as: :bills_by_date
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

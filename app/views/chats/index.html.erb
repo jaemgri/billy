@@ -1,6 +1,10 @@
 <div class="chat-page">
   <h2><i class="fa-solid fa-robot"></i> Your Chats with Billy</h2>
 
+  <%= link_to new_chat_path, class: "btn-app-primary d-inline-block mb-3" do %>
+    <i class="fa-solid fa-plus"></i> New Chat
+  <% end %>
+
   <% if @chats.any? %>
     <% @chats.each do |chat| %>
       <%= link_to chat_path(chat), class: "chat-list-item" do %>
