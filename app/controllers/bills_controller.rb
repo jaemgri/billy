@@ -35,7 +35,10 @@ class BillsController < ApplicationController
 
   def update
     @bill = editable_bills.find(params[:id])
+    was_paid = @bill.paid?
     if @bill.update(bill_params)
+      @bill.mark_as_paid!   if !was_paid && @bill.paid?
+      @bill.mark_as_unpaid! if was_paid  && !@bill.paid?
       redirect_to bill_path(@bill), notice: "Bill was successfully updated."
     else
       render :edit, status: :unprocessable_entity
@@ -69,7 +72,7 @@ class BillsController < ApplicationController
   private
 
   def bill_params
-    params.require(:bill).permit(:name, :amount, :description, :due_date, :received_date, :category)
+    params.require(:bill).permit(:name, :amount, :description, :due_date, :received_date, :category, :paid)
   end
 
   # Owner + anyone the bill is shared with (any role) can view
