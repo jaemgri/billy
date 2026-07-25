@@ -202,34 +202,145 @@ body {
   color: var(--text-dark);
 }
 
-.dashboard-card{
-  background:white;
-  border-radius:28px;
-  box-shadow:
-    0 8px 30px rgba(0,0,0,.06);
-}
+.dashboard-bill-card {
+  transition: all .25s ease;
 
-.calendar-card{
-    background:white;
-    border-radius:36px;
-    margin:10px;
-    box-shadow:0 10px 30px rgba(0,0,0,.06);
-}
-
-.category-pill{
-    background:#EEF5FF;
-    color:#2E5AAC;
-    border-radius:999px;
-    padding:5px 14px;
-    font-size:.8rem;
-    font-weight:600;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0,0,0,.08);
+    border-color: var(--main-accent);
+  }
 }
 
 .sidebar{
-    background:#FDFCF7;
+    background: var(--card-bg);
     border-radius:36px;
 }
 
 .header-title {
   color: var(--main-accent);
+}
+
+
+.calendar-card,
+.dashboard-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 28px;
+  padding: 24px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.05);
+}
+
+.card-header-soft {
+  margin-bottom: 24px;
+
+  h2 {
+    margin-bottom: 4px;
+    font-weight: 700;
+  }
+
+  p {
+    color: var(--subtitles);
+    margin: 0;
+  }
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  span {
+    color: var(--subtitles);
+    font-size: .85rem;
+  }
+}
+
+.dashboard-bill-card {
+  padding: 18px;
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  margin-bottom: 14px;
+  transition: all .25s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0,0,0,.08);
+  }
+}
+
+.category-pill {
+  background: rgba(244,162,97,.15);
+  color: var(--main-accent);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: .75rem;
+  font-weight: 600;
+}
+
+.bill-price {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.dashboard-total {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 2px solid var(--border);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  strong {
+    color: green;
+    font-size: 1.5rem;
+  }
+}
+
+.calendar-badge {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--main-accent);
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: .75rem;
+  font-weight: 700;
+}
+
+.dashboard-summary {
+  background: linear-gradient(
+    135deg,
+    var(--main-accent),
+    #ffb86b
+  );
+
+  color: white;
+  padding: 18px;
+  border-radius: 28px;
+  margin-bottom: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+
+  h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 8px 0 0;
+    opacity: 0.95;
+    font-size: 1rem;
+  }
+
+  strong {
+    font-size: 1.2rem;
+    color: white;
+  }
 }

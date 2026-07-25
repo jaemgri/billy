@@ -18,3 +18,45 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+<div class="new-bill-page">
+
+  <h1 class="new-bill-title">Confirm Your Email ✉️</h1>
+  <p class="page-subtitle">
+    Enter your email address and we'll send you a new confirmation email.
+  </p>
+
+  <div class="new-bill-form-card">
+
+    <%= simple_form_for(resource,
+          as: resource_name,
+          url: confirmation_path(resource_name),
+          html: { method: :post }) do |f| %>
+
+      <%= f.error_notification %>
+      <%= f.full_error :confirmation_token %>
+
+      <div class="form-group">
+        <%= f.label :email %>
+
+        <%= f.email_field :email,
+              required: true,
+              autofocus: true,
+              value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email),
+              autocomplete: "email",
+              class: "form-input",
+              placeholder: "you@example.com" %>
+      </div>
+
+      <%= f.button :submit,
+            "Resend Confirmation",
+            class: "btn-submit-bill" %>
+
+    <% end %>
+
+  </div>
+
+  <div class="auth-links">
+    <%= render "devise/shared/links" %>
+  </div>
+
+</div>

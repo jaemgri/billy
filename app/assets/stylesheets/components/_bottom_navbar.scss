@@ -25,7 +25,7 @@
   justify-content: center;
 
   text-decoration: none;
-  color: #777;
+  color: var(--subtitles);
   font-size: 12px;
 }
 
@@ -35,5 +35,24 @@
 }
 
 .nav-item:hover {
-  color: #4CAF50;
+  color: var(--primary-dark);
+}
+
+.nav-item-add {
+  i {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: var(--accent-amber);
+    color: white;
+
+    font-size: 1.5rem;
+
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  }
 }
