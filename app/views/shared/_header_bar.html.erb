@@ -2,4 +2,12 @@
   <%= link_to root_path, class: "text-decoration-none" do %>
     <h2 class="header-title fs-1 px-2"><i class="fa-solid fa-robot"></i>Billy</h2>
   <% end %>
+
+  <div class="header-right">
+    <% if user_signed_in? %>
+      <%= button_to "Sign Out", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "btn btn-outline-danger" %>
+    <% elsif !current_page?(new_user_session_path) %>
+      <%= link_to "Sign In", new_user_session_path, class: "btn btn-primary" %>
+    <% end %>
+
 </nav>
