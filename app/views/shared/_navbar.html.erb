@@ -1,16 +1,21 @@
 <div class="bottom-navbar">
-  <%= link_to root_path, class: "nav-item" do %>
+
+  <%= link_to root_path,
+      class: "nav-item #{'active' if current_page?(root_path)}" do %>
     <i class="fa-solid fa-house"></i>
     <span>Home</span>
   <% end %>
 
-  <%= link_to new_bill_path, class: "nav-item" do %>
-    <i class="fa-solid fa-circle-plus"></i>
-    <span>Add a bill</span>
+  <%= link_to new_bill_path,
+      class: "nav-item nav-item-add #{'active' if current_page?(new_bill_path)}" do %>
+    <i class="fa-solid fa-plus"></i>
+    <span>Add Bill</span>
   <% end %>
 
-  <%= link_to chats_path, class: "nav-item" do %>
+  <%= link_to chats_path,
+      class: "nav-item #{'active' if current_page?(chats_path)}" do %>
     <i class="fa-solid fa-robot"></i>
-    <span>Ask Billy</span>
+    <span>Billy</span>
   <% end %>
+
 </div>

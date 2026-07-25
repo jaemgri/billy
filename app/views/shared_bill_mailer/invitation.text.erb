@@ -1,3 +1,10 @@
-SharedBill#invitation
+You've been invited to view a bill on Billy!
 
-<%= @greeting %>, find me in app/views/shared_bill_mailer/invitation.text.erb
+<%= @bill.user.email %> shared a bill with you.
+
+<%= @bill.name %>
+Amount: ¥<%= @bill.amount %>
+Due: <%= @bill.due_date %>
+Category: <%= @bill.category %>
+
+View this bill: <%= bill_url(@bill) %>
