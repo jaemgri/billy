@@ -31,7 +31,11 @@
         </div>
       <% end %>
 
-      <%= f.button :submit, "Log In", class: "btn-submit-bill" %>
+      <div class="d-flex justify-content-center w-100">
+      <%= link_to "Log In",
+          new_user_session_path,
+          class: "header-btn" %>
+      </div>
 
     <% end %>
 

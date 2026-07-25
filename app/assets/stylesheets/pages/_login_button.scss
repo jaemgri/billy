@@ -1,0 +1,36 @@
+.header-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 24px;
+
+  border-radius: 9999px;
+
+  background: var(--main-accent);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+
+  border: none;
+
+  transition: all 0.2s ease;
+
+  &:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    color: white;
+  }
+}
+
+.header-btn-outline {
+  background: transparent;
+  color: var(--main-accent);
+  border: 2px solid var(--main-accent);
+
+  &:hover {
+    background: var(--main-accent);
+    color: white;
+  }
+}
