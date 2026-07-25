@@ -21,7 +21,7 @@
   <ul>
     <% @bill.shared_bills.each do |sb| %>
       <li>
-        <%= sb.user&.email || sb.invited_email %> (<%= sb.role %>)<%= " – pending" unless sb.user %>
+        <%= sb.user&.email || sb.invited_email %> <%= " – pending" unless sb.user %>
         <%= button_to "Remove", [@bill, sb], method: :delete,
               data: { turbo_confirm: "Remove access?" } %>
       </li>
