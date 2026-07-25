@@ -13,7 +13,7 @@ class SharedBillsController < ApplicationController
     )
 
     if @shared_bill.save
-      SharedBillMailer.invitation(@shared_bill).deliver_later
+      SharedBillMailer.invitation(@shared_bill).deliver_now
       redirect_to @bill, notice: "Bill shared with #{email}."
     else
       redirect_to @bill, alert: @shared_bill.errors.full_messages.to_sentence

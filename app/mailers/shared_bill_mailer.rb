@@ -4,9 +4,15 @@ class SharedBillMailer < ApplicationMailer
   #
   #   en.shared_bill_mailer.invitation.subject
   #
-  def invitation
-    @greeting = "Hi"
+  def invitation(shared_bill)
+    @shared_bill = shared_bill
+    @bill        = shared_bill.bill
+    recipient    = shared_bill.user&.email || shared_bill.invited_email
 
-    mail to: "to@example.org"
+    mail(
+      to: recipient,
+      reply_to: @bill.user.email,
+      subject: "A bill was shared with you on Billy"
+    )
   end
 end
