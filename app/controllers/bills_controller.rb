@@ -22,9 +22,7 @@ class BillsController < ApplicationController
 
   def create
     @bill = current_user.bills.build(bill_params)
-    if @bill.save!
-      @shared_bill = current_user.shared_bills.build(bill_id: @bill.id)
-      @shared_bill.save
+    if @bill.save # .save! raises on failure instead of returning false, so inside an if, the else/render :new branch never runs.
       redirect_to bill_path(@bill), notice: "Bill was successfully created."
     else
       render :new, status: :unprocessable_entity
