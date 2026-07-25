@@ -5,6 +5,10 @@ class ChatsController < ApplicationController
     @chats = current_user.chats
   end
 
+  def new
+    @bills = current_user.bills
+  end
+
   def show
     @chat = current_user.chats.find(params[:id])
     @messages = @chat.messages
