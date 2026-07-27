@@ -77,7 +77,7 @@ class BillsController < ApplicationController
   private
 
   def bill_params
-    params.require(:bill).permit(:name, :amount, :description, :due_date, :received_date, :category)
+    params.require(:bill).permit(:name, :amount, :description, :due_date, :received_date, :category, :paid)
   end
 
   # Owner + anyone invited (any status) — used by `show` so pending invitees can open the link
