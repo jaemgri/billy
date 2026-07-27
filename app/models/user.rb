@@ -26,7 +26,7 @@ class User < ApplicationRecord
   private
 
   def claim_pending_shared_bills
-    SharedBill.pending.where(invited_email: email).update_all(user_id: id)
+    SharedBill.unclaimed.where(invited_email: email).update_all(user_id: id)
   end
 
   def generate_username

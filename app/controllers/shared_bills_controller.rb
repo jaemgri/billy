@@ -9,8 +9,7 @@ class SharedBillsController < ApplicationController
 
     @shared_bill = @bill.shared_bills.build(
       user: user,
-      invited_email: user ? nil : email,
-      role: params[:shared_bill][:role]
+      invited_email: user ? nil : email
     )
 
     if @shared_bill.save
@@ -39,6 +38,19 @@ class SharedBillsController < ApplicationController
     @shared_bill = @bill.shared_bills.find(params[:id])
     @shared_bill.destroy
     redirect_to @bill, status: :see_other, notice: "Access removed."
+  end
+
+  def accept
+    @shared_bill = current_user.shared_bills.find(params[:id])
+    @shared_bill.update(status: :accepted)
+    redirect_to bill_path(@shared_bill.bill), notice: "You now have access to this bill."
+  end
+
+  def leave
+    @shared_bill = current_user.shared_bills.find(params[:id])
+    bill = @shared_bill.bill
+    @shared_bill.destroy
+    redirect_to bills_path, notice: "You've left this bill."
   end
 
   private

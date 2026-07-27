@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     resources :shared_bills, only: [:create, :update, :destroy] do
       member do
         patch :mark_paid
+        patch :accept
+        delete :leave
       end
     end
   end

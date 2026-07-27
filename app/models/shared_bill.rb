@@ -2,16 +2,18 @@ class SharedBill < ApplicationRecord
   belongs_to :bill
   belongs_to :user, optional: true # optional so pending email invites can exist
 
-  enum :role, { viewer: "viewer", commenter: "commenter", editor: "editor" },
-       default: "viewer"
-
   before_validation :normalize_email
   validate :user_or_email_present
   validate :not_the_owner
   validate :split_amount_within_bill_total
 
-  scope :pending,  -> { where(user_id: nil) }
-  scope :accepted, -> { where.not(user_id: nil) }
+  # scope :pending,  -> { where(user_id: nil) }
+  # scope :accepted, -> { where.not(user_id: nil) }
+
+  scope :unclaimed, -> { where(user_id: nil) }
+  scope :claimed,   -> { where.not(user_id: nil) }
+
+  enum :status, { pending: "pending", accepted: "accepted", declined: "declined" }, default: "pending"
 
   private
 
