@@ -2,12 +2,16 @@ class BillsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @bills = current_user.bills
-    @due_this_month = current_user.bills.where(due_date: Date.today.beginning_of_month..Date.today.end_of_month)
+    # @bills = current_user.bills
+    @bills = accessible_bills
+    # @due_this_month = current_user.bills.where(due_date: Date.today.beginning_of_month..Date.today.end_of_month)
+    @due_this_month = accessible_bills.where(due_date: Date.today.beginning_of_month..Date.today.end_of_month)
   end
 
   def show
-    @bill = accessible_bills.find(params[:id])
+    # @bill = accessible_bills.find(params[:id])
+    @bill = viewable_bills.find(params[:id])
+    @my_shared_bill = current_user.shared_bills.find_by(bill_id: @bill.id)
   end
 
   def new
@@ -30,12 +34,13 @@ class BillsController < ApplicationController
   end
 
   def edit
-    @bill = editable_bills.find(params[:id])
+    @bill = accessible_bills.find(params[:id])
   end
 
   def update
-    @bill = editable_bills.find(params[:id])
+    @bill = accessible_bills.find(params[:id])
     was_paid = @bill.paid?
+
     if @bill.update(bill_params)
       @bill.mark_as_paid!   if !was_paid && @bill.paid?
       @bill.mark_as_unpaid! if was_paid  && !@bill.paid?
@@ -64,7 +69,7 @@ class BillsController < ApplicationController
     else
       render json: { error: "Could not extract data from image", raw: text }, status: :unprocessable_entity
     end
-  rescue => e
+  rescue StandardError => e
     Rails.logger.error "extract_from_image error: #{e.class}: #{e.message}\n#{e.backtrace.first(5).join("\n")}"
     render json: { error: e.message }, status: :unprocessable_entity
   end
@@ -75,16 +80,16 @@ class BillsController < ApplicationController
     params.require(:bill).permit(:name, :amount, :description, :due_date, :received_date, :category, :paid)
   end
 
-  # Owner + anyone the bill is shared with (any role) can view
-  def accessible_bills
+  # Owner + anyone invited (any status) — used by `show` so pending invitees can open the link
+  def viewable_bills
     Bill.where(user: current_user)
-        .or(Bill.where(id: current_user.shared_with_bills.select(:id)))
+        .or(Bill.where(id: current_user.shared_bills.select(:bill_id)))
   end
 
-  # Owner + editors can edit/update
-  def editable_bills
-    editor_bill_ids = current_user.shared_bills.where(role: :editor).select(:bill_id)
-    Bill.where(user: current_user).or(Bill.where(id: editor_bill_ids))
+  # Owner + accepted shares only — used by `index`/calendar
+  def accessible_bills
+    Bill.where(user: current_user)
+        .or(Bill.where(id: current_user.shared_bills.accepted.select(:bill_id)))
   end
 
   def ai_parse_prompt

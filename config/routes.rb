@@ -3,7 +3,13 @@ Rails.application.routes.draw do
   root to: "bills#index"
   post 'bills/extract_from_image', to: 'bills#extract_from_image'
   resources :bills do
-    resources :shared_bills, only: [:create, :destroy]
+    resources :shared_bills, only: [:create, :update, :destroy] do
+      member do
+        patch :mark_paid
+        patch :accept
+        delete :leave
+      end
+    end
   end
   resources :chats, only: [:index, :new, :show, :create] do
     resources :messages, only: [:create]

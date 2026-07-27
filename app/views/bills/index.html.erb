@@ -9,6 +9,37 @@
       </div>
     </div>
 
+    <% pending_invites = current_user.shared_bills.pending %>
+    <% if pending_invites.any? %>
+      <div class="col-12">
+        <div class="dashboard-card">
+          <div class="dashboard-header">
+            <h3>📨 Pending Invites</h3>
+            <span><%= pending_invites.count %> Invite(s)</span>
+          </div>
+
+          <% pending_invites.each do |sb| %>
+            <div class="dashboard-bill-card">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <div class="d-flex align-items-center gap-2">
+                    <span class="bill-name"><%= sb.bill.name %></span>
+                  </div>
+                  <small>from <%= sb.bill.user.email %></small>
+                </div>
+
+                <div class="d-flex gap-2">
+                  <%= button_to "Accept", accept_bill_shared_bill_path(sb.bill, sb), method: :patch, class: "action-btn" %>
+                  <%= button_to "Ignore", leave_bill_shared_bill_path(sb.bill, sb), method: :delete, class: "action-btn delete", data: { turbo_confirm: "Ignore this invite?" } %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+
+        </div>
+      </div>
+    <% end %>
+
     <!-- Calendar -->
     <div class="col-12 col-lg-8">
 

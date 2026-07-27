@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_25_083109) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_27_053016) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -79,11 +79,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_25_083109) do
     t.bigint "bill_id", null: false
     t.datetime "created_at", null: false
     t.string "invited_email"
-    t.string "role"
+    t.boolean "paid"
+    t.decimal "split_amount"
+    t.string "status", default: "pending", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.index ["bill_id", "invited_email"], name: "index_shared_bills_on_bill_id_and_invited_email", unique: true, where: "(invited_email IS NOT NULL)"
-    t.index ["bill_id", "user_id"], name: "index_shared_bills_on_bill_id_and_user_id", unique: true, where: "(user_id IS NOT NULL)"
     t.index ["bill_id"], name: "index_shared_bills_on_bill_id"
     t.index ["user_id"], name: "index_shared_bills_on_user_id"
   end
