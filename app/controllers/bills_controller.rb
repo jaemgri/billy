@@ -38,8 +38,12 @@ class BillsController < ApplicationController
   end
 
   def update
-    @bill = accessible_bills_bills.find(params[:id])
+    @bill = accessible_bills.find(params[:id])
+    was_paid = @bill.paid?
+
     if @bill.update(bill_params)
+      @bill.mark_as_paid!   if !was_paid && @bill.paid?
+      @bill.mark_as_unpaid! if was_paid  && !@bill.paid?
       redirect_to bill_path(@bill), notice: "Bill was successfully updated."
     else
       render :edit, status: :unprocessable_entity
