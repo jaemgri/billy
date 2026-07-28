@@ -218,7 +218,6 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   margin-bottom: 20px;
 
 
@@ -414,6 +413,8 @@ body {
 }
 
 .dashboard-summary {
+  margin-top: 20px;
+  margin-bottom: 8px;
   background: linear-gradient(
     135deg,
     var(--main-accent),

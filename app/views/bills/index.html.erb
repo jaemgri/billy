@@ -9,6 +9,7 @@
       </div>
     </div>
 
+    <!-- Pending Invites -->
     <% pending_invites = current_user.shared_bills.pending %>
     <% if pending_invites.any? %>
       <div class="col-12">
@@ -42,7 +43,6 @@
 
     <!-- Calendar -->
     <div class="col-12 col-lg-8">
-
       <div class="calendar-card">
 
         <%= month_calendar(events: @bills, attribute: :due_date) do |date, bills| %>
@@ -51,18 +51,23 @@
 
             <div class="day-number"><%= date.day %></div>
 
-            <% if bills.any? %>
-              <div class="calendar-badge">
-                <%= bills.size %>
-              </div>
-            <% end %>
+          <% bills.first(2).each do |bill| %>
+            <div class="calendar-bill <%= bill.paid ? 'paid' : 'unpaid' %>">
+              <%= bill.name %>
+            </div>
+          <% end %>
+
+          <% if bills.size > 2 %>
+            <div class="calendar-more">
+              +<%= bills.size - 2 %> more
+            </div>
+          <% end %>
 
           <% end %>
 
         <% end %>
 
       </div>
-
     </div>
 
     <!-- Bills -->

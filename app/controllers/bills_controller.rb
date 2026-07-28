@@ -2,10 +2,9 @@ class BillsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    # @bills = current_user.bills
     @bills = accessible_bills
-    # @due_this_month = current_user.bills.where(due_date: Date.today.beginning_of_month..Date.today.end_of_month)
-    @due_this_month = accessible_bills.where(due_date: Date.today.beginning_of_month..Date.today.end_of_month)
+    @due_this_month = accessible_bills.where(paid: false,
+                                             due_date: Date.today.beginning_of_month..Date.today.end_of_month)
   end
 
   def show

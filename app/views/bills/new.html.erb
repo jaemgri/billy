@@ -1,5 +1,12 @@
 <div class="new-bill-page" data-controller="bill-upload">
-  <h1 class="new-bill-title">Add a New Bill</h1>
+  <div class="dashboard-summary">
+    <div>
+      <h2>Add a Bill 💸</h2>
+      <p class="page-subtitle">
+        Let's make sure you never miss a payment.
+      </p>
+    </div>
+  </div>
 
-  <%= render 'form', bill: @bill, use_image: true %>
+  <%= render "form", bill: @bill, use_image: true %>
 </div>

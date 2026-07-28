@@ -75,7 +75,7 @@ textarea.form-input {
 
   &:hover {
     background: var(--border);
-    color: #fff;
+    color: var(--subtitles);
   }
 }
 
@@ -87,7 +87,7 @@ textarea.form-input {
   border: 2px solid var(--border);
   border-radius: 999px;
   background: #fff;
-  font-size: 0.85rem;
+  font-size: 1.00rem;
   font-weight: 600;
   color: var(--subtitles);
   cursor: pointer;
@@ -97,13 +97,13 @@ textarea.form-input {
 
   &:hover {
     background: var(--border);
-    color: #fff;
+    color: var(--subtitles);
   }
 
   &:active {
     background: var(--border);
-    color: #fff;
     border-color: var(--border);
+    color: var(--subtitles);
   }
 }
 
@@ -171,5 +171,135 @@ textarea.form-input {
     &::after {
       transform: translateX(22px);
     }
+  }
+}
+
+.action-buttons {
+display: flex;
+justify-content: space-between;
+}
+
+// ---- Shared Bill list ----
+.shared-user {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px 0;
+
+  & + .shared-user {
+    border-top: 1px solid var(--border);
+  }
+}
+
+.shared-user-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.shared-user-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.split-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+
+  .form-input {
+    flex: 1;
+    min-width: 0;
+    max-width: 220px;
+    padding: 6px 20px;
+    border-radius: 999px;
+    text-align: center;
+  }
+}
+
+input.action-btn,
+button.action-btn {
+  padding: 10px 24px;
+  border: 2px solid var(--border);
+  border-radius: 999px;
+  background: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--subtitles);
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.2s, color 0.2s;
+
+  &:hover {
+    background: var(--border);
+    color: #fff;
+  }
+
+  &:active {
+    background: var(--border);
+    color: #fff;
+    border-color: var(--border);
+  }
+}
+
+button.action-btn.delete {
+  border-color: #ff2c2c;
+  color: #ff2c2c;
+
+  &:hover,
+  &:active {
+    background: #ff2c2c;
+    color: #fff;
+  }
+}
+
+.remove-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 2px solid #ff2c2c;
+  border-radius: 50%;
+  background: #fff;
+  color: #ff2c2c;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+
+  &:hover,
+  &:active {
+    background: #ff2c2c;
+    color: #fff;
+  }
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 18px;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--subtitles);
+  text-align: center;
+  white-space: nowrap;
+
+  &.paid {
+    border-color: #008000;
+    color: #008000;
+    background: rgba(0, 128, 0, 0.08);
+  }
+
+  &.unpaid {
+    border-color: #ff5900;
+    color: #ff5900;
+    background: rgba(255, 89, 0, 0.08);
   }
 }

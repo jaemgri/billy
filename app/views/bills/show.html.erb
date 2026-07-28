@@ -26,49 +26,33 @@
 
   <div class="new-bill-form-card">
     <div class="form-group">
-      <label>Description</label>
+      <label style="font-size: 1.3rem;">Description</label></h2>
       <p class="bill-value">
-        <%= @bill.description.presence || "No description" %>
+      <%= @bill.description.presence || "No description" %>
       </p>
     </div>
     <div class="form-group">
-      <label>Amount</label>
-      <h2 class="bill-amount">¥<%= @bill.amount.to_i%></h2>
+      <label style="font-size: 1.3rem;">Amount</label>
+     <class="bill-amount">¥<%= @bill.amount.to_i.to_fs(:delimited) %>
     </div>
     <div class="form-group">
-      <label>Category</label>
+      <label style="font-size: 1.3rem;">Category</label>
       <p class="bill-value"><%= @bill.category %></p>
     </div>
     <div class="form-group">
-      <label>Due Date</label>
+      <label style="font-size: 1.3rem;">Due Date</label>
       <p class="bill-value">
         <%= @bill.due_date.strftime("%B %d, %Y") %>
       </p>
     </div>
-
-  </div>
-
-  <%# Ask Billy now gated to owner or accepted shared user %>
-  <% if @bill.user == current_user || @my_shared_bill&.accepted? %>
-    <%= button_to "💬 Ask Billy",
-        chats_path(bill_id: @bill.id),
-        method: :post,
-        class: "btn-submit-bill" %>
-  <% end %>
-
   <div class="action-buttons">
 
     <%# Edit now gated to owner or accepted shared user %>
     <% if @bill.user == current_user || @my_shared_bill&.accepted? %>
       <%= link_to edit_bill_path(@bill), class: "action-btn" do %>
-        <i class="fa-solid fa-pen"></i>
-        <span>Edit</span>
-      <% end %>
-    <% end %>
 
-    <%= link_to bills_path, class: "action-btn" do %>
-      <i class="fa-solid fa-arrow-left"></i>
-      <span>Back</span>
+        <button type="button" class="btn btn-outline-primary rounded-pill"> ✏️ Edit</button>
+      <% end %>
     <% end %>
 
     <%# Delete is now owner-only; shared users get to Leave instead (was unconditional Delete for everyone) %>
@@ -79,8 +63,8 @@
             turbo_confirm: "Are you sure?"
           },
           class: "action-btn delete" do %>
-        <i class="fa-solid fa-trash"></i>
-        <span>Delete</span>
+
+        <button type="button" class="btn btn-outline-danger rounded-pill">🗑️ Delete</button>
       <% end %>
     <% elsif @my_shared_bill&.accepted? %>
       <%= button_to leave_bill_shared_bill_path(@bill, @my_shared_bill),
@@ -92,12 +76,23 @@
       <% end %>
     <% end %>
   </div>
+  </div>
+
+  <%# Ask Billy now gated to owner or accepted shared user %>
+  <% if @bill.user == current_user || @my_shared_bill&.accepted? %>
+    <%= button_to "💬 Ask Billy",
+        chats_path(bill_id: @bill.id),
+        method: :post,
+        class: "btn-submit-bill text-2xl" %>
+  <% end %>
+
+
 
  <% if @bill.user == current_user %>
 
     <div class="new-bill-form-card">
 
-      <h2 class="section-title">Share Bill</h2>
+      <h2 class="section-title">📩 Share Bill</h2>
 
       <%= form_with model: [@bill, SharedBill.new] do |f| %>
 
@@ -108,16 +103,14 @@
                 class: "form-input",
                 required: true %>
         </div>
-
         <%= f.submit "Share", class: "btn-submit-bill mt-3" %>
-
       <% end %>
 
     </div>
 
     <div class="new-bill-form-card">
 
-      <h2 class="section-title">Shared With</h2>
+      <h2 class="section-title"> Shared With</h2>
 
       <p class="bill-value">
         Assigned to others: ¥<%= @bill.shared_bills.sum(:split_amount).to_i %>
@@ -129,41 +122,47 @@
 
           <div class="shared-user">
 
-            <div>
-              <strong><%= sb.user&.email || sb.invited_email %></strong><br>
-              <small><%= "Pending invitation" unless sb.user %>
-                <%# show invite status next to pending %>
-                <br>
-                <%= sb.status %>
-              </small>
+            <div class="shared-user-top">
+              <div>
+                <strong><%= sb.user&.email || sb.invited_email %></strong><br>
+                <small><%= "Pending invitation" unless sb.user %>
+                  <%# show invite status next to pending %>
+                  <br>
+                  <%= sb.status %>
+                </small>
+              </div>
+
+              <span class="status-badge <%= sb.paid? ? "paid" : "unpaid" %>"><%= sb.paid? ? "Paid" : "Unpaid" %></span>
             </div>
 
-            <%# Owner sets/updates this person's split amount & sees paid status with warning wrapper %>
-            <% other_splits_total = @bill.shared_bills.where.not(id: sb.id).sum(:split_amount) %>
-            <div data-controller="split-warning"
-                 data-split-warning-bill-amount-value="<%= @bill.amount.to_f %>"
-                 data-split-warning-other-splits-total-value="<%= other_splits_total.to_f %>">
+            <div class="shared-user-actions">
+              <%# Owner sets/updates this person's split amount & sees paid status with warning wrapper %>
+              <% other_splits_total = @bill.shared_bills.where.not(id: sb.id).sum(:split_amount) %>
+              <div data-controller="split-warning"
+                  data-split-warning-bill-amount-value="<%= @bill.amount.to_f %>"
+                  data-split-warning-other-splits-total-value="<%= other_splits_total.to_f %>">
 
-              <%= form_with model: [@bill, sb], method: :patch, html: { class: "split-form" } do |f| %>
-                <%= f.number_field :split_amount,
-                      step: 0.01,
-                      value: sb.split_amount,
-                      placeholder: "Split ¥",
-                      class: "form-input",
-                      data: { split_warning_target: "input", action: "input->split-warning#check" } %>
-                <%= f.submit "Set", class: "action-btn" %>
-              <% end %>
+                <%= form_with model: [@bill, sb], method: :patch, html: { class: "split-form" } do |f| %>
+                  <%= f.number_field :split_amount,
+                        step: 0.01,
+                        value: sb.split_amount,
+                        placeholder: "Split ¥",
+                        class: "form-input",
+                        data: { split_warning_target: "input", action: "input->split-warning#check" } %>
+                  <%= f.submit "Set", class: "action-btn" %>
+                <% end %>
 
-              <small class="text-danger d-none" data-split-warning-target="warning"></small>
+                <small class="text-danger d-none" data-split-warning-target="warning"></small>
+              </div>
+              <span class="bill-value"><%= sb.paid? ? "Paid" : "Unpaid" %></span>
             </div>
-            <span class="bill-value"><%= sb.paid? ? "Paid" : "Unpaid" %></span>
 
-
-            <%= button_to "",
-                  [@bill, sb],
-                  method: :delete,
-                  class: "remove-btn fa-solid fa-xmark",
-                  data: { turbo_confirm: "Remove access?" } %>
+              <%= button_to "",
+                    [@bill, sb],
+                    method: :delete,
+                    class: "remove-btn fa-solid fa-xmark",
+                    data: { turbo_confirm: "Remove access?" } %>
+            </div>
 
           </div>
 
@@ -183,7 +182,7 @@
   <% if @my_shared_bill&.accepted? && @my_shared_bill.split_amount.present? %>
     <div class="new-bill-form-card">
       <h2 class="section-title">Your Share</h2>
-      <p class="bill-value">¥<%= @my_shared_bill.split_amount.to_i %> — <%= @my_shared_bill.paid? ? "Paid" : "Unpaid" %></p>
+      <p class="bill-value">¥<%= @my_shared_bill.split_amount.to_i %> — <span class="status-badge <%= @my_shared_bill.paid? ? "paid" : "unpaid" %>"><%= @my_shared_bill.paid? ? "Paid" : "Unpaid" %></span></p>
       <% unless @my_shared_bill.paid? %>
         <%= button_to "Mark as paid", mark_paid_bill_shared_bill_path(@bill, @my_shared_bill), method: :patch, class: "btn-submit-bill" %>
       <% end %>

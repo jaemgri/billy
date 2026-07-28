@@ -14,7 +14,11 @@
 
   <%= link_to chats_path,
       class: "nav-item #{'active' if current_page?(chats_path)}" do %>
-    <i class="fa-solid fa-robot"></i>
+    <span class="robot-icon-wrap">
+      <i class="fa-solid fa-bolt bolt bolt-left"></i>
+      <i class="fa-solid fa-robot sparkle-btn"></i>
+      <i class="fa-solid fa-bolt bolt bolt-right"></i>
+    </span>
     <span>Billy</span>
   <% end %>
 

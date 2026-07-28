@@ -49,7 +49,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_27_053016) do
     t.text "description"
     t.date "due_date"
     t.string "name"
-    t.boolean "paid", default: false, null: false
+    t.boolean "paid", default: false
     t.datetime "paid_at"
     t.date "received_date"
     t.datetime "updated_at", null: false
@@ -84,6 +84,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_27_053016) do
     t.string "status", default: "pending", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.index ["bill_id", "invited_email"], name: "index_shared_bills_on_bill_id_and_invited_email", unique: true, where: "(invited_email IS NOT NULL)"
+    t.index ["bill_id", "user_id"], name: "index_shared_bills_on_bill_id_and_user_id", unique: true, where: "(user_id IS NOT NULL)"
     t.index ["bill_id"], name: "index_shared_bills_on_bill_id"
     t.index ["user_id"], name: "index_shared_bills_on_user_id"
   end
