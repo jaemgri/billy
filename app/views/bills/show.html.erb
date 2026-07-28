@@ -119,6 +119,10 @@
 
       <h2 class="section-title">Shared With</h2>
 
+      <p class="bill-value">
+        Assigned to others: ¥<%= @bill.shared_bills.sum(:split_amount).to_i %>
+        - Your remaining share: ¥<%= @bill.owner_remaining_amount.to_i %>
+      </p>
       <% if @bill.shared_bills.any? %>
 
         <% @bill.shared_bills.each do |sb| %>
