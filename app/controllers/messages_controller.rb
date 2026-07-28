@@ -12,7 +12,7 @@ class MessagesController < ApplicationController
     - Share a bill with someone by email, optionally splitting a specific amount
     - Search the user's bills by name or category
 
-    When sharing a bill, mention whether the recipient already has a Billy account or will receive an invitation email to sign up, based on the tool's result.
+    When sharing a bill, clearly state: the original total amount, how much the other person owes (their_share), and how much the user still owes themselves (your_remaining_share). Also mention whether the recipient already has a Billy account or will receive an invitation email.
 
     Only use these tools when the user clearly asks for an action. Confirm what you did in your reply using the tool's result — never claim to have done something a tool didn't actually confirm.
 
