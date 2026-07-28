@@ -46,29 +46,27 @@
       <div class="calendar-card">
 
         <%= month_calendar(events: @bills, attribute: :due_date) do |date, bills| %>
-
           <%= link_to "/bills/date/#{date}", class: "calendar-day text-decoration-none" do %>
 
             <div class="day-number"><%= date.day %></div>
 
-          <% bills.first(2).each do |bill| %>
-            <div class="calendar-bill <%= bill.paid ? 'paid' : 'unpaid' %>">
-              <%= bill.name %>
+            <div class="bill-list">
+              <% bills.first(2).each do |bill| %>
+                <div class="bill-pill <%= bill.paid? ? 'paid' : 'unpaid' %>">
+                  <span class="bill-title"><%= bill.name %></span>
+                </div>
+              <% end %>
+
+              <% if bills.size > 2 %>
+                <div class="bill-more">+<%= bills.size - 2 %> more</div>
+              <% end %>
             </div>
-          <% end %>
-
-          <% if bills.size > 2 %>
-            <div class="calendar-more">
-              +<%= bills.size - 2 %> more
-            </div>
-          <% end %>
 
           <% end %>
-
         <% end %>
 
+        </div>
       </div>
-    </div>
 
     <!-- Bills -->
     <div class="col-12 col-lg-4">
