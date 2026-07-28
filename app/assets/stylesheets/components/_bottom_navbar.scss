@@ -56,3 +56,71 @@
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
   }
 }
+
+.robot-icon-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+
+  i {
+    margin-bottom: 0;
+  }
+
+  .sparkle-btn {
+    font-size: 24px;
+  }
+}
+
+.bolt {
+  position: absolute;
+  top: 2px;
+  font-size: 10px;
+  color: var(--accent-amber);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.bolt-left {
+  right: 100%;
+  transform: translateX(4px) scale(0.6);
+}
+
+.bolt-right {
+  left: 100%;
+  transform: translateX(-4px) scale(0.6) scaleX(-1);
+}
+
+@keyframes bolt-shoot-left {
+  0%   { opacity: 0; transform: translateX(4px) scale(0.6); }
+  40%  { opacity: 1; transform: translateX(-2px) scale(1); }
+  100% { opacity: 0; transform: translateX(-10px) scale(0.8); }
+}
+
+@keyframes bolt-shoot-right {
+  0%   { opacity: 0; transform: translateX(-4px) scale(0.6) scaleX(-1); }
+  40%  { opacity: 1; transform: translateX(2px) scale(1) scaleX(-1); }
+  100% { opacity: 0; transform: translateX(10px) scale(0.8) scaleX(-1); }
+}
+
+.nav-item:hover .bolt-left,
+.nav-item:active .bolt-left {
+  animation: bolt-shoot-left 0.5s ease-out;
+}
+
+.nav-item:hover .bolt-right,
+.nav-item:active .bolt-right {
+  animation: bolt-shoot-right 0.5s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-item:hover .bolt-left,
+  .nav-item:hover .bolt-right,
+  .nav-item:active .bolt-left,
+  .nav-item:active .bolt-right {
+    animation: none;
+    opacity: 1;
+  }
+}
