@@ -9,6 +9,7 @@ puts "Creating users..."
 james = User.create!(email: "james@example.com", password: "password", name: "James")
 nina = User.create!(email: "nina@example.com", password: "password", name: "Nina")
 cassandra = User.create!(email: "cassandra@example.com", password: "password", name: "Cassandra")
+rie = User.create!(email: "rie@example.com", password: "password", name: "Rie")
 
 puts "Creating bills for James..."
 rent = Bill.create!(
