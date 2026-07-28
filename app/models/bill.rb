@@ -10,6 +10,10 @@ class Bill < ApplicationRecord
   before_validation :round_amount
   validates :amount, numericality: { only_integer: true, allow_nil: true }
 
+  def owner_remaining_amount
+    amount.to_f - shared_bills.sum(:split_amount).to_f
+  end
+
   private
 
   def round_amount
