@@ -2,67 +2,58 @@
   font-family: inherit;
 }
 
-.calendar-day {
-  min-height: 110px;
-  max-height: 110px;
-  overflow: hidden;
-}
-
 .calendar-heading {
-  font-size: 1.3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+
+  font-size: 1.4rem;
   font-weight: 600;
-  margin-bottom: 12px;
-  color: #2d3748;
+  color: var(--text-dark);
 }
 
 .calendar-heading a {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: #6a73e6;
+  color: var(--main-accent);
   text-decoration: none;
-  margin-left: 8px;
+  font-weight: 600;
 }
 
 .simple-calendar table {
   width: 100%;
   border-collapse: separate;
-  border-spacing: 4px;
+  border-spacing: 8px;
 }
 
 .simple-calendar thead th {
-  background: transparent;
-  color: #a0aec0;
-  font-size: 0.75rem;
+  color: var(--subtitles);
+  font-size: .75rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  padding: 8px 0;
+  padding-bottom: 8px;
   border: none;
-  text-align: center;
 }
 
 .simple-calendar td.day {
-  background: #f7fafc;
-  border-radius: 10px;
-  height: 70px;
-  vertical-align: top;
+  background: var(--card-container);
+  border-radius: 24px;
+  border: 2px solid transparent;
   padding: 8px;
-  border: none;
-  transition: background 0.2s ease;
+  height: 130px;
+  width: 14.28%;
+  vertical-align: top;
+  transition: .2s ease;
 }
 
-.simple-calendar td.day.past {
-  opacity: 0.5;
+.simple-calendar td.day:hover {
+  background: var(--input-field);
 }
 
 .simple-calendar td.day.today {
-  background: #eef2ff;
-  border: 2px solid #6a73e6;
+  background: rgba(234,166,56,.15);
+  border-color: var(--calendar-selected-date);
 }
 
-.day-number {
-  font-weight: 600;
-  font-size: 0.85rem;
-  color: #2d3748;
-  margin-bottom: 4px;
+.simple-calendar td.day.past {
+  opacity: .65;
 }
