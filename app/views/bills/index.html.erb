@@ -51,17 +51,12 @@
             <div class="day-number"><%= date.day %></div>
 
             <div class="bill-list">
-              <% bills.first(2).each do |bill| %>
-                <div class="bill-pill <%= bill.paid? ? 'paid' : 'unpaid' %>">
-                  <span class="bill-title"><%= bill.name %></span>
+              <% if bills.any? %>
+                <div class="calendar-badge">
+                  <%= bills.size %>
                 </div>
               <% end %>
-
-              <% if bills.size > 2 %>
-                <div class="bill-more">+<%= bills.size - 2 %> more</div>
-              <% end %>
             </div>
-
           <% end %>
         <% end %>
 
