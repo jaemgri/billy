@@ -7,11 +7,13 @@
   font-weight: 600;
   margin-bottom: 12px;
   color: #2d3748;
+  display: flex;
+  flex-direction: column;
 }
 
 .calendar-heading a {
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 800;
   color: #6a73e6;
   text-decoration: none;
   margin-left: 8px;
@@ -72,4 +74,23 @@
   font-size: 0.85rem;
   color: #2d3748;
   margin-bottom: 4px;
+}
+
+.calendar-title {
+  text-align: center;
+}
+
+.simple-calendar .calendar-heading nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: space-evenly;
+  margin-top: 8px;
+}
+
+.calendar-heading nav a:nth-child(2){
+text-align: center;
+}
+
+.calendar-heading nav a:nth-child(3){
+text-align: end;
 }
