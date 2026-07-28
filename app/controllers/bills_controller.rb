@@ -92,7 +92,13 @@ class BillsController < ApplicationController
   end
 
   def ai_parse_prompt
-    "Extract bill information from this image. Return ONLY valid JSON with these keys: name (string, the bill or company name), description (string, brief description of what the bill is for), amount (number without currency symbol), category (string, e.g. Utilities, Rent, Subscription), due_date (string in YYYY-MM-DD format). Use null for any field that cannot be found."
+    allowed_categories = Bill.categories.values.join(", ")
+
+    "Extract bill information from this image. Return ONLY valid JSON with these keys: " \
+    "name (string, the bill or company name), description (string, brief description of what the bill is for), " \
+    "amount (number without currency symbol), category (string, must be exactly one of: #{allowed_categories}), " \
+    "due_date (string in YYYY-MM-DD format). Use null for any field that cannot be found, " \
+    "or for category if none of the listed options apply."
   end
 
   def ai_parse_bill(image_path)

@@ -9,6 +9,7 @@ class Bill < ApplicationRecord
   validates :due_date, presence: true
   before_validation :round_amount
   validates :amount, numericality: { only_integer: true, allow_nil: true }
+  enum :category, { food: "Food", utilities: "Utilities", rent: "Rent", subscription: "Subscription", Entertainment: "Entertainment", other: "Other" }, validate: { allow_nil: true }
 
   def owner_remaining_amount
     amount.to_f - shared_bills.sum(:split_amount).to_f
