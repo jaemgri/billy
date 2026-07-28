@@ -49,7 +49,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_27_053016) do
     t.text "description"
     t.date "due_date"
     t.string "name"
-    t.boolean "paid", default: false, null: false
+    t.boolean "paid", default: false
     t.datetime "paid_at"
     t.date "received_date"
     t.datetime "updated_at", null: false
