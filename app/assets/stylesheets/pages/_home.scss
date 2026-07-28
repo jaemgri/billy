@@ -52,6 +52,27 @@ body {
 }
 
 
+.billy-icon {
+  width: 60px;
+  height: 61px;
+  object-fit: contain;
+}
+
+.billy-card-img {
+  width: 10%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.chat-card-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 // ==========================
 // Dashboard Layout
 // ==========================
