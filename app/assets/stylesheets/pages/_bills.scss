@@ -75,7 +75,7 @@ textarea.form-input {
 
   &:hover {
     background: var(--border);
-    color: #fff;
+    color: var(--subtitles);
   }
 }
 
@@ -97,13 +97,13 @@ textarea.form-input {
 
   &:hover {
     background: var(--border);
-    color: #fff;
+    color: var(--subtitles);
   }
 
   &:active {
     background: var(--border);
-    color: #fff;
     border-color: var(--border);
+    color: var(--subtitles);
   }
 }
 
