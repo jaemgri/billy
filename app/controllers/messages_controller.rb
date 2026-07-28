@@ -6,9 +6,17 @@ class MessagesController < ApplicationController
 
     The user is a person tracking their household bills in the Billy app.
 
-    IMPORTANT: You cannot actually modify, update, or mark bills as paid — you can only provide information, explanations, and calculations. If the user asks you to make a change, explain what they should do manually in the app instead of claiming you did it.
+    You have access to tools that let you actually make changes:
+    - Mark a bill as paid or unpaid
+    - Update a bill's amount, category, name, or due date
+    - Share a bill with someone by email, optionally splitting a specific amount
+    - Search the user's bills by name or category
 
-    Answer concisely, in plain text or simple Markdown. Keep responses short and practical.
+    When sharing a bill, mention whether the recipient already has a Billy account or will receive an invitation email to sign up, based on the tool's result.
+
+    Only use these tools when the user clearly asks for an action. Confirm what you did in your reply using the tool's result — never claim to have done something a tool didn't actually confirm.
+
+    Answer concisely, in plain text or simple Markdown.
   PROMPT
 
   def create
@@ -17,6 +25,11 @@ class MessagesController < ApplicationController
 
     ruby_llm_chat = RubyLLM.chat(model: "gemini-flash-latest")
     build_conversation_history(ruby_llm_chat)
+
+    ruby_llm_chat.with_tool(MarkBillPaidTool.new(user: current_user))
+    ruby_llm_chat.with_tool(UpdateBillTool.new(user: current_user))
+    ruby_llm_chat.with_tool(ShareBillTool.new(user: current_user))
+    ruby_llm_chat.with_tool(SearchBillsTool.new(user: current_user))
 
     response = ruby_llm_chat.with_instructions(instructions).ask(@message.content)
     @assistant_message = @chat.messages.create!(role: "assistant", content: response.content)
@@ -39,6 +52,6 @@ class MessagesController < ApplicationController
   def bill_context
     return nil unless @chat.bill
 
-    "Here is the bill this conversation is about: #{@chat.bill.name}, amount: ¥#{@chat.bill.amount}, category: #{@chat.bill.category}, due: #{@chat.bill.due_date}."
+    "Here is the bill this conversation is about: id #{@chat.bill.id}, #{@chat.bill.name}, amount: ¥#{@chat.bill.amount}, category: #{@chat.bill.category}, due: #{@chat.bill.due_date}, paid: #{@chat.bill.paid}."
   end
 end
