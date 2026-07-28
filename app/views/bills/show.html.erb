@@ -118,28 +118,32 @@
 
           <div class="shared-user">
 
-            <div>
-              <strong><%= sb.user&.email || sb.invited_email %></strong><br>
-              <small><%= "Pending invitation" unless sb.user %>
-                <%# show invite status next to pending %>
-                <br>
-                <%= sb.status %>
-              </small>
+            <div class="shared-user-top">
+              <div>
+                <strong><%= sb.user&.email || sb.invited_email %></strong><br>
+                <small><%= "Pending invitation" unless sb.user %>
+                  <%# show invite status next to pending %>
+                  <br>
+                  <%= sb.status %>
+                </small>
+              </div>
+
+              <span class="status-badge <%= sb.paid? ? "paid" : "unpaid" %>"><%= sb.paid? ? "Paid" : "Unpaid" %></span>
             </div>
 
-            <%# Owner sets/updates this person's split amount & sees paid status %>
-            <%= form_with model: [@bill, sb], method: :patch, html: { class: "split-form" } do |f| %>
-              <%= f.number_field :split_amount, step: 0.01, value: sb.split_amount, placeholder: "Split ¥", class: "form-input" %>
-              <%= f.submit "Set", class: "action-btn" %>
-            <% end %>
-            <span class="status-badge <%= sb.paid? ? "paid" : "unpaid" %>"><%= sb.paid? ? "Paid" : "Unpaid" %></span>
+            <div class="shared-user-actions">
+              <%# Owner sets/updates this person's split amount & sees paid status %>
+              <%= form_with model: [@bill, sb], method: :patch, html: { class: "split-form" } do |f| %>
+                <%= f.number_field :split_amount, step: 0.01, value: sb.split_amount, placeholder: "Split ¥", class: "form-input" %>
+                <%= f.submit "Set", class: "action-btn" %>
+              <% end %>
 
-
-            <%= button_to "",
-                  [@bill, sb],
-                  method: :delete,
-                  class: "remove-btn fa-solid fa-xmark",
-                  data: { turbo_confirm: "Remove access?" } %>
+              <%= button_to "",
+                    [@bill, sb],
+                    method: :delete,
+                    class: "remove-btn fa-solid fa-xmark",
+                    data: { turbo_confirm: "Remove access?" } %>
+            </div>
 
           </div>
 
