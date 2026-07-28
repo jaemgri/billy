@@ -112,6 +112,10 @@
 
       <h2 class="section-title"> Shared With</h2>
 
+      <p class="bill-value">
+        Assigned to others: ¥<%= @bill.shared_bills.sum(:split_amount).to_i %>
+        - Your remaining share: ¥<%= @bill.owner_remaining_amount.to_i %>
+      </p>
       <% if @bill.shared_bills.any? %>
 
         <% @bill.shared_bills.each do |sb| %>
@@ -132,11 +136,26 @@
             </div>
 
             <div class="shared-user-actions">
-              <%# Owner sets/updates this person's split amount & sees paid status %>
-              <%= form_with model: [@bill, sb], method: :patch, html: { class: "split-form" } do |f| %>
-                <%= f.number_field :split_amount, step: 0.01, value: sb.split_amount, placeholder: "Split ¥", class: "form-input" %>
-                <%= f.submit "Set", class: "action-btn" %>
-              <% end %>
+              <%# Owner sets/updates this person's split amount & sees paid status with warning wrapper %>
+              <% other_splits_total = @bill.shared_bills.where.not(id: sb.id).sum(:split_amount) %>
+              <div data-controller="split-warning"
+                  data-split-warning-bill-amount-value="<%= @bill.amount.to_f %>"
+                  data-split-warning-other-splits-total-value="<%= other_splits_total.to_f %>">
+
+                <%= form_with model: [@bill, sb], method: :patch, html: { class: "split-form" } do |f| %>
+                  <%= f.number_field :split_amount,
+                        step: 0.01,
+                        value: sb.split_amount,
+                        placeholder: "Split ¥",
+                        class: "form-input",
+                        data: { split_warning_target: "input", action: "input->split-warning#check" } %>
+                  <%= f.submit "Set", class: "action-btn" %>
+                <% end %>
+
+                <small class="text-danger d-none" data-split-warning-target="warning"></small>
+              </div>
+              <span class="bill-value"><%= sb.paid? ? "Paid" : "Unpaid" %></span>
+            </div>
 
               <%= button_to "",
                     [@bill, sb],

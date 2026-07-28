@@ -10,8 +10,12 @@ class Bill < ApplicationRecord
   before_validation :round_amount
   validates :amount, numericality: { only_integer: true, allow_nil: true }
 
-  scope :paid,   -> { where(paid: true) }
-  scope :unpaid, -> { where(paid: false) }
+  def owner_remaining_amount
+    amount.to_f - shared_bills.sum(:split_amount).to_f
+  end
+
+  scope :paid,    -> { where(paid: true) }
+  scope :unpaid,  -> { where(paid: false) }
   scope :overdue, -> { unpaid.where(due_date: ...Date.today) }
 
   def mark_as_paid!

@@ -6,6 +6,7 @@ class SharedBill < ApplicationRecord
   validate :user_or_email_present
   validate :not_the_owner
   validate :split_amount_within_bill_total
+  validates :split_amount, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
 
   # scope :pending,  -> { where(user_id: nil) }
   # scope :accepted, -> { where.not(user_id: nil) }
