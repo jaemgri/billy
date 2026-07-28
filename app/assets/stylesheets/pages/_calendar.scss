@@ -2,6 +2,12 @@
   font-family: inherit;
 }
 
+.calendar-day {
+  min-height: 110px;
+  max-height: 110px;
+  overflow: hidden;
+}
+
 .calendar-heading {
   font-size: 1.3rem;
   font-weight: 600;
