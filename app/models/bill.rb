@@ -14,6 +14,22 @@ class Bill < ApplicationRecord
     amount.to_f - shared_bills.sum(:split_amount).to_f
   end
 
+  scope :paid,    -> { where(paid: true) }
+  scope :unpaid,  -> { where(paid: false) }
+  scope :overdue, -> { unpaid.where(due_date: ...Date.today) }
+
+  def mark_as_paid!
+    update!(paid: true, paid_at: Time.current)
+  end
+
+  def mark_as_unpaid!
+    update!(paid: false, paid_at: nil)
+  end
+
+  def overdue?
+    !paid? && due_date.present? && due_date < Date.today
+  end
+
   private
 
   def round_amount

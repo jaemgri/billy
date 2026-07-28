@@ -1,3 +1,223 @@
 .custom-chevron {
   color: var(--main-accent);
 }
+
+// ---- Chat index page ----
+.chat-index-page {
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chat-index-hero {
+  background: linear-gradient(135deg, var(--primary-dark), var(--main-accent));
+  border-radius: 24px;
+  padding: 20px;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 8px 24px rgba(0, 115, 183, 0.25);
+
+  .chat-hero-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  h2 {
+    margin: 0 0 2px;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.8rem;
+    opacity: 0.85;
+  }
+}
+
+.btn-new-chat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--main-accent);
+  text-decoration: none;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+  i {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--main-accent);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+  }
+
+  &:hover {
+    background: var(--card-container);
+    border-color: var(--main-accent);
+    color: var(--primary-dark);
+  }
+}
+
+.chat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chat-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: white;
+  border-radius: 18px;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: var(--text-dark);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--card-container);
+  transition: all 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09);
+    border-color: var(--border);
+    color: var(--text-dark);
+  }
+
+  .chat-card-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--card-container);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-dark);
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .chat-card-body {
+    flex: 1;
+
+    strong {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    span {
+      font-size: 0.75rem;
+      color: var(--subtitles);
+    }
+  }
+
+  .chat-card-arrow {
+    color: var(--border);
+    font-size: 0.85rem;
+  }
+}
+
+.chat-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--subtitles);
+  font-size: 0.9rem;
+}
+
+// ---- New chat page ----
+.chat-new-page {
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.chat-new-form-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.chat-select-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--subtitles);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.chat-select-wrapper {
+  position: relative;
+
+  .chat-select-icon {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--subtitles);
+    font-size: 0.8rem;
+    pointer-events: none;
+  }
+}
+
+.chat-select {
+  width: 100%;
+  padding: 12px 36px 12px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  background: var(--input-field);
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  appearance: none;
+  outline: none;
+  box-sizing: border-box;
+
+  &:focus {
+    border-color: var(--main-accent);
+  }
+}
+
+.btn-start-chat {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--primary-dark), var(--main-accent));
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 115, 183, 0.3);
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
