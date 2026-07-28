@@ -132,7 +132,7 @@
               <%= f.number_field :split_amount, step: 0.01, value: sb.split_amount, placeholder: "Split ¥", class: "form-input" %>
               <%= f.submit "Set", class: "action-btn" %>
             <% end %>
-            <span class="bill-value"><%= sb.paid? ? "Paid" : "Unpaid" %></span>
+            <span class="status-badge <%= sb.paid? ? "paid" : "unpaid" %>"><%= sb.paid? ? "Paid" : "Unpaid" %></span>
 
 
             <%= button_to "",
@@ -159,7 +159,7 @@
   <% if @my_shared_bill&.accepted? && @my_shared_bill.split_amount.present? %>
     <div class="new-bill-form-card">
       <h2 class="section-title">Your Share</h2>
-      <p class="bill-value">¥<%= @my_shared_bill.split_amount.to_i %> — <%= @my_shared_bill.paid? ? "Paid" : "Unpaid" %></p>
+      <p class="bill-value">¥<%= @my_shared_bill.split_amount.to_i %> — <span class="status-badge <%= @my_shared_bill.paid? ? "paid" : "unpaid" %>"><%= @my_shared_bill.paid? ? "Paid" : "Unpaid" %></span></p>
       <% unless @my_shared_bill.paid? %>
         <%= button_to "Mark as paid", mark_paid_bill_shared_bill_path(@bill, @my_shared_bill), method: :patch, class: "btn-submit-bill" %>
       <% end %>

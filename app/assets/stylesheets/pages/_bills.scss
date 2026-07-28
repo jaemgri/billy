@@ -178,3 +178,87 @@ textarea.form-input {
 display: flex;
 justify-content: space-between;
 }
+
+// ---- Shared Bill list ----
+.shared-user {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 0;
+
+  & + .shared-user {
+    border-top: 1px solid var(--border);
+  }
+}
+
+.split-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .form-input {
+    width: 130px;
+  }
+}
+
+input.action-btn,
+button.action-btn {
+  padding: 10px 24px;
+  border: 2px solid var(--border);
+  border-radius: 999px;
+  background: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--subtitles);
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.2s, color 0.2s;
+
+  &:hover {
+    background: var(--border);
+    color: #fff;
+  }
+
+  &:active {
+    background: var(--border);
+    color: #fff;
+    border-color: var(--border);
+  }
+}
+
+button.action-btn.delete {
+  border-color: #ff2c2c;
+  color: #ff2c2c;
+
+  &:hover,
+  &:active {
+    background: #ff2c2c;
+    color: #fff;
+  }
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 18px;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--subtitles);
+  text-align: center;
+  white-space: nowrap;
+
+  &.paid {
+    border-color: #008000;
+    color: #008000;
+    background: rgba(0, 128, 0, 0.08);
+  }
+
+  &.unpaid {
+    border-color: #ff5900;
+    color: #ff5900;
+    background: rgba(255, 89, 0, 0.08);
+  }
+}
