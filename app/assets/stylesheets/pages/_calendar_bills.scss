@@ -1,79 +1,63 @@
-/* Layout for the day cell */
-.calendar-day {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 90px;
-  padding: 4px;
-  color: inherit;
+.simple-calendar {
+  font-family: inherit;
+}
+
+.calendar-heading {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #2d3748;
+}
+
+.calendar-heading a {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #6a73e6;
+  text-decoration: none;
+  margin-left: 8px;
+}
+
+.simple-calendar table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 4px;
+}
+
+.simple-calendar thead th {
+  background: transparent;
+  color: #a0aec0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 8px 0;
+  border: none;
+  text-align: center;
+}
+
+.simple-calendar td.day {
+  background: #f7fafc;
+  border-radius: 10px;
+  height: 70px;
+  vertical-align: top;
+  padding: 8px;
+  border: none;
+  transition: background 0.2s ease;
+}
+
+.simple-calendar td.day.past {
+  opacity: 0.5;
+}
+
+.simple-calendar td.day.today {
+  background: #eef2ff;
+  border: 2px solid #6a73e6;
 }
 
 .day-number {
   font-weight: 600;
   font-size: 0.85rem;
-  color: #495057;
+  color: #2d3748;
   margin-bottom: 4px;
 }
 
-/* Container holding the bill tags */
-.bill-list {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  overflow: hidden;
-}
-
-/* Individual Rectangular Bill Tag */
-.bill-pill {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-size: 0.725rem;
-  line-height: 1.2;
-  font-weight: 500;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  transition: opacity 0.15s ease;
-}
-
-.bill-pill:hover {
-  opacity: 0.85;
-}
-
-/* Truncate long titles cleanly */
-.bill-title {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  margin-right: 4px;
-}
-
-.bill-amount {
-  font-weight: 600;
-  flex-shrink: 0;
-}
-
-/* Color States: Unpaid (Urgent/Noticeable) vs Paid (Subtle) */
-.bill-pill.unpaid {
-  background-color: #ffebe9;
-  color: #cf222e;
-  border-left: 3px solid #cf222e;
-}
-
-.bill-pill.paid {
-  background-color: #dafbe1;
-  color: #1a7f37;
-  border-left: 3px solid #1a7f37;
-}
-
-/* "+ X more" overflow label */
-.bill-more {
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: #6c757d;
-  padding: 1px 4px;
-  margin-top: 1px;
-}
