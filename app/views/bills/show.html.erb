@@ -26,49 +26,33 @@
 
   <div class="new-bill-form-card">
     <div class="form-group">
-      <label>Description</label>
+      <label style="font-size: 1.3rem;">Description</label></h2>
       <p class="bill-value">
-        <%= @bill.description.presence || "No description" %>
+      <%= @bill.description.presence || "No description" %>
       </p>
     </div>
     <div class="form-group">
-      <label>Amount</label>
-      <h2 class="bill-amount">¥<%= @bill.amount.to_i%></h2>
+      <label style="font-size: 1.3rem;">Amount</label>
+     <class="bill-amount">¥<%= @bill.amount.to_i.to_fs(:delimited) %>
     </div>
     <div class="form-group">
-      <label>Category</label>
+      <label style="font-size: 1.3rem;">Category</label>
       <p class="bill-value"><%= @bill.category %></p>
     </div>
     <div class="form-group">
-      <label>Due Date</label>
+      <label style="font-size: 1.3rem;">Due Date</label>
       <p class="bill-value">
         <%= @bill.due_date.strftime("%B %d, %Y") %>
       </p>
     </div>
-
-  </div>
-
-  <%# Ask Billy now gated to owner or accepted shared user %>
-  <% if @bill.user == current_user || @my_shared_bill&.accepted? %>
-    <%= button_to "💬 Ask Billy",
-        chats_path(bill_id: @bill.id),
-        method: :post,
-        class: "btn-submit-bill" %>
-  <% end %>
-
   <div class="action-buttons">
 
     <%# Edit now gated to owner or accepted shared user %>
     <% if @bill.user == current_user || @my_shared_bill&.accepted? %>
       <%= link_to edit_bill_path(@bill), class: "action-btn" do %>
-        <i class="fa-solid fa-pen"></i>
-        <span>Edit</span>
-      <% end %>
-    <% end %>
 
-    <%= link_to bills_path, class: "action-btn" do %>
-      <i class="fa-solid fa-arrow-left"></i>
-      <span>Back</span>
+        <button type="button" class="btn btn-outline-primary rounded-pill"> ✏️ Edit</button>
+      <% end %>
     <% end %>
 
     <%# Delete is now owner-only; shared users get to Leave instead (was unconditional Delete for everyone) %>
@@ -79,8 +63,8 @@
             turbo_confirm: "Are you sure?"
           },
           class: "action-btn delete" do %>
-        <i class="fa-solid fa-trash"></i>
-        <span>Delete</span>
+
+        <button type="button" class="btn btn-outline-danger rounded-pill">🗑️ Delete</button>
       <% end %>
     <% elsif @my_shared_bill&.accepted? %>
       <%= button_to leave_bill_shared_bill_path(@bill, @my_shared_bill),
@@ -92,12 +76,23 @@
       <% end %>
     <% end %>
   </div>
+  </div>
+
+  <%# Ask Billy now gated to owner or accepted shared user %>
+  <% if @bill.user == current_user || @my_shared_bill&.accepted? %>
+    <%= button_to "💬 Ask Billy",
+        chats_path(bill_id: @bill.id),
+        method: :post,
+        class: "btn-submit-bill text-2xl" %>
+  <% end %>
+
+
 
  <% if @bill.user == current_user %>
 
     <div class="new-bill-form-card">
 
-      <h2 class="section-title">Share Bill</h2>
+      <h2 class="section-title">📩 Share Bill</h2>
 
       <%= form_with model: [@bill, SharedBill.new] do |f| %>
 
@@ -108,16 +103,14 @@
                 class: "form-input",
                 required: true %>
         </div>
-
         <%= f.submit "Share", class: "btn-submit-bill mt-3" %>
-
       <% end %>
 
     </div>
 
     <div class="new-bill-form-card">
 
-      <h2 class="section-title">Shared With</h2>
+      <h2 class="section-title"> Shared With</h2>
 
       <% if @bill.shared_bills.any? %>
 

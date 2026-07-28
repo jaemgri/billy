@@ -87,7 +87,7 @@ textarea.form-input {
   border: 2px solid var(--border);
   border-radius: 999px;
   background: #fff;
-  font-size: 0.85rem;
+  font-size: 1.00rem;
   font-weight: 600;
   color: var(--subtitles);
   cursor: pointer;
@@ -172,4 +172,9 @@ textarea.form-input {
       transform: translateX(22px);
     }
   }
+}
+
+.action-buttons {
+display: flex;
+justify-content: space-between;
 }
