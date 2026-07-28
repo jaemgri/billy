@@ -20,8 +20,15 @@ class ShareBillTool < RubyLLM::Tool
 
     SharedBillMailer.invitation(shared_bill).deliver_now
 
-    { status: "success", bill: bill.name, shared_with: email, split_amount: shared_bill.split_amount,
-      has_account: shared_user.present? }
+    {
+      status: "success",
+      bill: bill.name,
+      total_amount: bill.amount,
+      shared_with: email,
+      their_share: shared_bill.split_amount,
+      your_remaining_share: bill.owner_remaining_amount,
+      has_account: shared_user.present?
+    }
   rescue ActiveRecord::RecordNotFound
     { error: "Bill not found" }
   rescue ActiveRecord::RecordInvalid => e

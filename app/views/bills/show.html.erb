@@ -110,13 +110,19 @@
 
     <div class="new-bill-form-card">
 
-      <h2 class="section-title"> Shared With</h2>
+      <h2 class="section-title">Shared With</h2>
 
-      <p class="bill-value">
-        Assigned to others: ¥<%= @bill.shared_bills.sum(:split_amount).to_i %>
-        - Your remaining share: ¥<%= @bill.owner_remaining_amount.to_i %>
-      </p>
-      <% if @bill.shared_bills.any? %>
+      <div class="split-summary">
+        <div class="split-summary-stat">
+          <span class="split-summary-label">Assigned to others</span>
+          <span class="split-summary-value">¥<%= @bill.shared_bills.sum(:split_amount).to_i %></span>
+        </div>
+        <div class="split-summary-divider"></div>
+        <div class="split-summary-stat">
+          <span class="split-summary-label">Your remaining share</span>
+          <span class="split-summary-value">¥<%= @bill.owner_remaining_amount.to_i %></span>
+        </div>
+      </div>      <% if @bill.shared_bills.any? %>
 
         <% @bill.shared_bills.each do |sb| %>
 
@@ -125,18 +131,14 @@
             <div class="shared-user-top">
               <div>
                 <strong><%= sb.user&.email || sb.invited_email %></strong><br>
-                <small><%= "Pending invitation" unless sb.user %>
-                  <%# show invite status next to pending %>
-                  <br>
-                  <%= sb.status %>
-                </small>
+                <small><%= sb.user ? sb.status.capitalize : "Pending invitation" %></small>
               </div>
 
               <span class="status-badge <%= sb.paid? ? "paid" : "unpaid" %>"><%= sb.paid? ? "Paid" : "Unpaid" %></span>
             </div>
 
             <div class="shared-user-actions">
-              <%# Owner sets/updates this person's split amount & sees paid status with warning wrapper %>
+              <%# Owner sets/updates this person's split amount, with warning wrapper %>
               <% other_splits_total = @bill.shared_bills.where.not(id: sb.id).sum(:split_amount) %>
               <div data-controller="split-warning"
                   data-split-warning-bill-amount-value="<%= @bill.amount.to_f %>"
@@ -154,7 +156,6 @@
 
                 <small class="text-danger d-none" data-split-warning-target="warning"></small>
               </div>
-              <span class="bill-value"><%= sb.paid? ? "Paid" : "Unpaid" %></span>
             </div>
 
               <%= button_to "",
