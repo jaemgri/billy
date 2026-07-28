@@ -109,7 +109,7 @@
                   </div>
 
                   <div class="bill-price">
-                    <%= number_to_currency(bill.amount.to_i, unit: "¥", precision: 0) %>
+                    <%= number_to_currency(bill.amount_for(current_user).to_i, unit: "¥", precision: 0) %>
                   </div>
 
                 </div>
@@ -131,9 +131,8 @@
         <div class="dashboard-total">
 
           <span>Total Due</span>
-
           <strong>
-            <%= number_to_currency(@due_this_month.sum(&:amount), unit: "¥", precision: 0) %>
+            <%= number_to_currency(@due_this_month.sum { |bill| bill.amount_for(current_user) }, unit: "¥", precision: 0) %>
           </strong>
 
         </div>

@@ -31,6 +31,12 @@ class Bill < ApplicationRecord
     !paid? && due_date.present? && due_date < Date.today
   end
 
+  def amount_for(user)
+    return owner_remaining_amount if user == self.user
+
+    shared_bills.accepted.find_by(user: user)&.split_amount || amount
+  end
+
   private
 
   def round_amount
