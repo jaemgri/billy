@@ -80,10 +80,12 @@
 
   <%# Ask Billy now gated to owner or accepted shared user %>
   <% if @bill.user == current_user || @my_shared_bill&.accepted? %>
-    <%= button_to "💬 Ask Billy",
-        chats_path(bill_id: @bill.id),
+    <%= button_to chats_path(bill_id: @bill.id),
         method: :post,
-        class: "btn-submit-bill text-2xl" %>
+        form: { class: "d-flex justify-content-center" },
+        class: "btn-submit-bill btn-ask-billy text-2xl" do %>
+          <%= image_tag "Billy4.png", alt: "Billy", class: "ask-billy-icon" %> Ask Billy
+    <% end %>
   <% end %>
 
 

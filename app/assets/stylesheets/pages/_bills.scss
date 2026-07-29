@@ -124,6 +124,19 @@ select.form-input {
   }
 }
 
+.btn-ask-billy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.ask-billy-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
 .btn-return-bill {
   display: block;
   width: fit-content;
