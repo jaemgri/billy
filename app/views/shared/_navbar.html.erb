@@ -15,9 +15,9 @@
   <%= link_to chats_path,
       class: "nav-item #{'active' if current_page?(chats_path)}" do %>
     <span class="robot-icon-wrap">
-      <i class="fa-solid fa-bolt bolt bolt-left"></i>
-      <i class="fa-solid fa-robot sparkle-btn"></i>
-      <i class="fa-solid fa-bolt bolt bolt-right"></i>
+      <span class="wing wing-left">🪽</span>
+      <%= image_tag "Billy4.png", alt: "Billy", class: "billy-icon nav-billy-icon" %>
+      <span class="wing wing-right">🪽</span>
     </span>
     <span>Billy</span>
   <% end %>
