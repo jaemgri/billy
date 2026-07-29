@@ -90,10 +90,16 @@ select.form-input {
   }
 }
 
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
 .btn-submit-bill {
   display: block;
   width: fit-content;
-  margin: 0 auto;
   padding: 12px 40px;
   border: 2px solid var(--border);
   border-radius: 999px;
@@ -103,6 +109,34 @@ select.form-input {
   color: var(--subtitles);
   cursor: pointer;
   text-align: center;
+
+  transition: background 0.2s, color 0.2s;
+
+  &:hover {
+    background: var(--border);
+    color: var(--subtitles);
+  }
+
+  &:active {
+    background: var(--border);
+    border-color: var(--border);
+    color: var(--subtitles);
+  }
+}
+
+.btn-return-bill {
+  display: block;
+  width: fit-content;
+  padding: 12px 40px;
+  border: 2px solid var(--border);
+  border-radius: 999px;
+  background: #fff;
+  font-size: 1.00rem;
+  font-weight: 600;
+  color: var(--subtitles);
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
 
   transition: background 0.2s, color 0.2s;
 
