@@ -77,41 +77,46 @@
 
           <% @due_this_month.each do |bill| %>
 
-            <%= link_to bill_path(bill), class: "text-decoration-none" do %>
+            <div class="dashboard-bill-card">
 
-              <div class="dashboard-bill-card">
-
-                <div class="d-flex justify-content-between align-items-center">
-
+              <!-- Clickable details row -->
+              <%= link_to bill_path(bill), class: "text-decoration-none text-reset" do %>
+                <div class="d-flex justify-content-between align-items-center mb-2">
                   <div>
-
                     <div class="d-flex align-items-center gap-2">
-
                       <span class="bill-name">
                         <%= bill.name %>
                       </span>
-
                       <span class="category-pill">
                         <%= bill.category %>
                       </span>
-
                     </div>
-
                     <small>
                       Due <%= bill.due_date.strftime("%b %d") %>
                     </small>
-
                   </div>
 
                   <div class="bill-price">
                     <%= number_to_currency(bill.amount_for(current_user).to_i, unit: "¥", precision: 0) %>
                   </div>
-
                 </div>
+              <% end %>
 
-              </div>
+              <!-- Toggle form kept separate from the link -->
+              <%= form_with model: bill, id: "edit_bill_#{bill.id}" do |f| %>
+                <div class="form-group-toggle">
+                  <div>
+                    <span class="toggle-label">Paid</span>
+                    <span class="toggle-sublabel">Mark this bill as paid</span>
+                  </div>
+                  <label class="toggle-switch">
+                    <%= f.check_box :paid, class: "toggle-input", onchange: "this.form.requestSubmit()" %>
+                    <span class="toggle-track"></span>
+                  </label>
+                </div>
+              <% end %>
 
-            <% end %>
+            </div>
 
           <% end %>
 
