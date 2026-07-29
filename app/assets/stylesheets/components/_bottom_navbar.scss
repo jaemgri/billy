@@ -62,65 +62,78 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 4px;
+  margin-bottom: -2px;
 
   i {
     margin-bottom: 0;
   }
 
-  .sparkle-btn {
-    font-size: 24px;
+  .nav-billy-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
   }
 }
 
-.bolt {
+.wing {
   position: absolute;
-  top: 2px;
-  font-size: 10px;
-  color: var(--accent-amber);
+  top: 50%;
+  font-size: 16px;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.15s ease, transform 0.15s ease;
+  transform: translateY(-50%) scale(0.4);
 }
 
-.bolt-left {
+.wing-left {
   right: 100%;
-  transform: translateX(4px) scale(0.6);
 }
 
-.bolt-right {
+.wing-right {
   left: 100%;
-  transform: translateX(-4px) scale(0.6) scaleX(-1);
+  transform: translateY(-50%) scale(0.4) scaleX(-1);
 }
 
-@keyframes bolt-shoot-left {
-  0%   { opacity: 0; transform: translateX(4px) scale(0.6); }
-  40%  { opacity: 1; transform: translateX(-2px) scale(1); }
-  100% { opacity: 0; transform: translateX(-10px) scale(0.8); }
+@keyframes wing-flap-left {
+  0%   { opacity: 0; transform: translateY(-50%) scale(0.4) rotate(15deg); }
+  40%  { opacity: 1; transform: translateY(-65%) scale(1.15) rotate(-15deg); }
+  100% { opacity: 1; transform: translateY(-55%) scale(1) rotate(0deg); }
 }
 
-@keyframes bolt-shoot-right {
-  0%   { opacity: 0; transform: translateX(-4px) scale(0.6) scaleX(-1); }
-  40%  { opacity: 1; transform: translateX(2px) scale(1) scaleX(-1); }
-  100% { opacity: 0; transform: translateX(10px) scale(0.8) scaleX(-1); }
+@keyframes wing-flap-right {
+  0%   { opacity: 0; transform: translateY(-50%) scale(0.4) scaleX(-1) rotate(-15deg); }
+  40%  { opacity: 1; transform: translateY(-65%) scale(1.15) scaleX(-1) rotate(15deg); }
+  100% { opacity: 1; transform: translateY(-55%) scale(1) scaleX(-1) rotate(0deg); }
 }
 
-.nav-item:hover .bolt-left,
-.nav-item:active .bolt-left {
-  animation: bolt-shoot-left 0.5s ease-out;
+.nav-item:hover .wing-left,
+.nav-item:active .wing-left {
+  animation: wing-flap-left 0.4s ease-out forwards;
 }
 
-.nav-item:hover .bolt-right,
-.nav-item:active .bolt-right {
-  animation: bolt-shoot-right 0.5s ease-out;
+.nav-item:hover .wing-right,
+.nav-item:active .wing-right {
+  animation: wing-flap-right 0.4s ease-out forwards;
+}
+
+.nav-item:active .nav-billy-icon {
+  animation: billy-fly 0.4s ease-out;
+}
+
+@keyframes billy-fly {
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .nav-item:hover .bolt-left,
-  .nav-item:hover .bolt-right,
-  .nav-item:active .bolt-left,
-  .nav-item:active .bolt-right {
+  .nav-item:hover .wing-left,
+  .nav-item:hover .wing-right,
+  .nav-item:active .wing-left,
+  .nav-item:active .wing-right {
     animation: none;
     opacity: 1;
+  }
+
+  .nav-item:active .nav-billy-icon {
+    animation: none;
   }
 }
