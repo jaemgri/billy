@@ -41,6 +41,41 @@
       </div>
     <% end %>
 
+    <!-- Category Breakdown -->
+    <% if @category_breakdown.present? %>
+      <% total = @category_breakdown.values.sum.to_f %>
+      <% colors = ["#FF6B6B", "#4ECDC4", "#FFD93D", "#6C5CE7", "#1DD1A1", "#FF9F43", "#54A0FF", "#EE5A6F"] %>
+      <% cumulative = 0 %>
+      <% stops = @category_breakdown.each_with_index.map do |(cat, amt), i|
+          start_pct = total.zero? ? 0 : (cumulative / total * 100).round(2)
+          cumulative += amt
+          end_pct = total.zero? ? 0 : (cumulative / total * 100).round(2)
+          "#{colors[i % colors.length]} #{start_pct}% #{end_pct}%"
+        end.join(", ") %>
+
+      <div class="col-12">
+        <div class="dashboard-card">
+          <div class="dashboard-header">
+            <h3>🥧 This Month by Category</h3>
+          </div>
+
+          <div class="category-breakdown">
+            <div class="category-donut" style="background: conic-gradient(<%= stops %>);"></div>
+
+            <div class="category-legend">
+              <% @category_breakdown.each_with_index do |(cat, amt), i| %>
+                <%= link_to bills_by_category_path(category: cat), class: "category-legend-item text-decoration-none" do %>
+                  <span class="legend-swatch" style="background: <%= colors[i % colors.length] %>;"></span>
+                  <span class="legend-label"><%= cat %></span>
+                  <span class="legend-amount"><%= number_to_currency(amt, unit: "¥", precision: 0) %></span>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
     <!-- Calendar -->
     <div class="col-12 col-lg-8">
       <div class="calendar-card">
