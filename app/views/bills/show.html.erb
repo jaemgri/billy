@@ -110,6 +110,8 @@
 
     </div>
 
+  <%# If the bill is not shared with anyone, this card should be hidden %>
+   <% if @bill.shared_bills.any? %>
     <div class="new-bill-form-card">
 
       <h2 class="section-title">💸 Shared With</h2>
@@ -193,5 +195,5 @@
   <% end %>
 
   <% end %>
-
+<% end %>
 </div>
