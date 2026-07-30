@@ -5,6 +5,9 @@ class BillsController < ApplicationController
     @bills = accessible_bills
     @due_this_month = accessible_bills.where(paid: false,
                                              due_date: Date.today.beginning_of_month..Date.today.end_of_month)
+    @category_breakdown = @due_this_month
+                          .group_by { |bill| bill.category.presence || "Uncategorized" }
+                          .transform_values { |bills| bills.sum { |b| b.amount_for(current_user) } }
   end
 
   def show
@@ -73,6 +76,15 @@ class BillsController < ApplicationController
     render json: { error: e.message }, status: :unprocessable_entity
   end
 
+  def category
+    @category = params[:category]
+    @bills =  if @category == "Uncategorized"
+                accessible_bills.where(category: [nil, ""])
+              else
+                accessible_bills.where(category: @category)
+              end
+  end
+
   private
 
   def bill_params
@@ -95,10 +107,10 @@ class BillsController < ApplicationController
     allowed_categories = Bill.categories.values.join(", ")
 
     "Extract bill information from this image. Return ONLY valid JSON with these keys: " \
-    "name (string, the bill or company name), description (string, brief description of what the bill is for), " \
-    "amount (number without currency symbol), category (string, must be exactly one of: #{allowed_categories}), " \
-    "due_date (string in YYYY-MM-DD format). Use null for any field that cannot be found, " \
-    "or for category if none of the listed options apply."
+      "name (string, the bill or company name), description (string, brief description of what the bill is for), " \
+      "amount (number without currency symbol), category (string, must be exactly one of: #{allowed_categories}), " \
+      "due_date (string in YYYY-MM-DD format). Use null for any field that cannot be found, " \
+      "or for category if none of the listed options apply."
   end
 
   def ai_parse_bill(image_path)
