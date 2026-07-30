@@ -18,7 +18,7 @@ rent = Bill.create!(
   amount: 90000,
   due_date: Date.today + 10,
   received_date: Date.today - 5,
-  category: "Housing",
+  category: "Rent",
   user: james
 )
 
