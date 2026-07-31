@@ -40,7 +40,6 @@
               </div>
             </div>
           <% end %>
-
         </div>
       </div>
     <% end %>
@@ -184,32 +183,32 @@
           "#{colors[i % colors.length]} #{start_pct}% #{end_pct}%"
         end.join(", ") %>
 
-      <div class="col-12">
-        <div class="dashboard-card">
-          <div class="dashboard-header">
-            <h3>🥧 This Month by Category</h3>
+      <div class="dashboard-card">
+        <div class="dashboard-header">
+          <h3>🥧 <%= @selected_month.strftime("%B %Y") %> Usage by Category</h3>
+          <span><%= filter_label %></span>
+        </div>
+
+        <div class="category-breakdown">
+          <div class="category-donut" style="background: conic-gradient(<%= stops %>);">
+            <div class="category-donut-center">
+              <span class="donut-total"><%= number_to_currency(total, unit: "¥", precision: 0) %></span>
+              <span class="donut-caption"><%= @category_breakdown.size %> categories</span>
+            </div>
           </div>
 
-          <div class="category-breakdown">
-            <div class="category-donut" style="background: conic-gradient(<%= stops %>);"></div>
-
-            <div class="category-legend">
-              <% @category_breakdown.each_with_index do |(cat, amt), i| %>
-                <%= link_to bills_by_category_path(category: cat), class: "category-legend-item text-decoration-none" do %>
-                  <span class="legend-swatch" style="background: <%= colors[i % colors.length] %>;"></span>
-                  <span class="legend-label"><%= cat %></span>
-                  <span class="legend-amount"><%= number_to_currency(amt, unit: "¥", precision: 0) %></span>
-                <% end %>
+          <div class="category-legend">
+            <% @category_breakdown.each_with_index do |(cat, amt), i| %>
+              <%= link_to bills_by_category_path(category: cat), class: "category-legend-item text-decoration-none" do %>
+                <span class="legend-swatch" style="background: <%= colors[i % colors.length] %>;"></span>
+                <span class="legend-label"><%= cat %></span>
+                <span class="legend-amount"><%= number_to_currency(amt, unit: "¥", precision: 0) %></span>
               <% end %>
-            </div>
+            <% end %>
           </div>
         </div>
       </div>
     <% end %>
-
     </div>
-
-
   </div>
-
 </div>
