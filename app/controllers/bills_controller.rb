@@ -3,15 +3,35 @@ class BillsController < ApplicationController
 
   def index
     @bills = accessible_bills
-    @due_this_month = accessible_bills.where(paid: false,
-                                             due_date: Date.today.beginning_of_month..Date.today.end_of_month)
+
+    raw = params[:start_date].to_s
+    @selected_month = begin
+      if raw.match?(/\A\d{4}-\d{2}\z/)      # from the month-picker input (Step 3)
+        Date.parse("#{raw}-01")
+      elsif raw.present?
+        Date.parse(raw)                     # from simple_calendar's own Next/Previous links
+      else
+        Date.today
+      end
+    rescue ArgumentError
+      Date.today
+    end
+
+    month_range = @selected_month.beginning_of_month..@selected_month.end_of_month
+    @paid_filter = params[:paid_filter].presence_in(%w[unpaid paid all]) || "unpaid"
+
+    bills_in_range = accessible_bills.where(due_date: month_range)
+    @due_this_month = case @paid_filter
+                      when "unpaid" then bills_in_range.where(paid: false)
+                      when "paid"   then bills_in_range.where(paid: true)
+                      else               bills_in_range
+                      end
     @category_breakdown = @due_this_month
                           .group_by { |bill| bill.category.presence || "Uncategorized" }
                           .transform_values { |bills| bills.sum { |b| b.amount_for(current_user) } }
   end
 
   def show
-    # @bill = accessible_bills.find(params[:id])
     @bill = viewable_bills.find(params[:id])
     @my_shared_bill = current_user.shared_bills.find_by(bill_id: @bill.id)
   end
@@ -54,7 +74,7 @@ class BillsController < ApplicationController
 
   def date
     @target_date = params[:date]
-    @bills = current_user.bills.where(due_date: params[:date])
+    @bills = accessible_bills.where(due_date: params[:date])
   end
 
   def extract_from_image
