@@ -1,0 +1,36 @@
+<% if bills.any? %>
+<div class="dashboard-card mx-3">
+  <% bills.each do |bill| %>
+    <%= link_to bill_path(bill), { class: "text-decoration-none" } do %>
+      <div class="bill-card mb-2 p-3 border rounded shadow-sm">
+        <div class="d-flex justify-content-between align-items-center w-100">
+          <div>
+            <div class="d-flex align-items-center">
+              <span class="bill-name fw-bold"><%= bill.name %></span>
+              <span class="badge bg-secondary ms-2"><%= bill.category %></span>
+            </div>
+            <div class="text-muted small">
+              Due <%= bill.due_date.strftime("%b %d") %> (<%= (bill.due_date - Date.today).to_i %> days)
+            </div>
+          </div>
+          <div class="fw-bold fs-5">
+            <%= number_to_currency(bill.amount_for(current_user).to_i, unit: "¥", precision: 0) %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  <div class="dashboard-total">
+
+    <span>Total Due</span>
+    <strong>
+      <%= number_to_currency(bills.sum { |bill| bill.amount_for(current_user) }, unit: "¥", precision: 0) %>
+    </strong>
+
+  </div>
+<% else %>
+  <p class="text-muted fst-italic text-center">No bills in this category.</p>
+<% end %>
+
+</div>
