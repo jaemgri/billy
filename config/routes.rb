@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       end
     end
   end
-  resources :chats, only: [:index, :new, :show, :create] do
+  resources :chats, only: [:index, :new, :show, :create, :destroy] do
     resources :messages, only: [:create]
   end
   get "bills/date/:date" => "bills#date", as: :bills_by_date

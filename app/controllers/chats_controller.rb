@@ -18,4 +18,10 @@ class ChatsController < ApplicationController
     @chat = current_user.chats.create!(bill_id: params[:bill_id].presence)
     redirect_to chat_path(@chat)
   end
+
+  def destroy
+    @chat = current_user.chats.find(params[:id])
+    @chat.destroy
+    redirect_to chats_path, status: :see_other, notice: "Chat was deleted."
+  end
 end
