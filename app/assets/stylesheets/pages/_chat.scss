@@ -93,6 +93,7 @@
 }
 
 .chat-card {
+  flex: 1;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -145,6 +146,32 @@
     color: var(--border);
     font-size: 0.85rem;
   }
+}
+
+.chat-card-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chat-delete-btn {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  color: #d9534f;
+  text-decoration: none;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+
+.chat-delete-btn:hover {
+  background: rgba(217, 83, 79, 0.1);
 }
 
 .chat-empty {
