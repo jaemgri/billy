@@ -1,0 +1,21 @@
+.form-group-toggle {
+  display: inline-flex;  /* Or 'display: flex' depending on your layout */
+  align-items: center;   /* Keeps text and toggle vertically centered */
+  gap: 8px;
+  flex-direction: row-reverse;            /* Adjust spacing between label and switch */
+}
+
+/* Optional styling to ensure text alignment */
+.toggle-label {
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.paid-button {
+  display: flex;
+  align-items: center;
+}
+
+.form-align-right {
+  margin-left: auto;
+}
