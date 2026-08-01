@@ -1,3 +1,5 @@
+<meta name="turbo-cache-control" content="no-cache">
+
 <div class="chat-new-page">
   <div class="chat-index-hero">
     <div class="chat-hero-icon">
@@ -5,7 +7,7 @@
     </div>
     <div>
       <h2>Start a New Chat</h2>
-      <p>Which bill do you want to ask Billy about?</p>
+      <p>Ask about a specific bill, or start a general chat.</p>
     </div>
   </div>
 
@@ -15,6 +17,7 @@
         <label class="chat-select-label">Select a Bill</label>
         <div class="chat-select-wrapper">
           <select name="bill_id" class="chat-select">
+            <option value="">General chat (no specific bill)</option>
             <% @bills.each do |bill| %>
               <option value="<%= bill.id %>"><%= bill.name %></option>
             <% end %>

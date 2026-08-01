@@ -15,7 +15,7 @@ class ChatsController < ApplicationController
   end
 
   def create
-    @chat = current_user.chats.create!(bill_id: params[:bill_id])
+    @chat = current_user.chats.create!(bill_id: params[:bill_id].presence)
     redirect_to chat_path(@chat)
   end
 end
