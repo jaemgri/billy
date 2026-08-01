@@ -57,15 +57,10 @@
 
     <%# Delete is now owner-only; shared users get to Leave instead (was unconditional Delete for everyone) %>
     <% if @bill.user == current_user %>
-      <%= link_to bill_path(@bill),
-          data: {
-            turbo_method: :delete,
-            turbo_confirm: "Are you sure?"
-          },
-          class: "action-btn delete" do %>
-
-        <button type="button" class="btn btn-outline-danger rounded-pill">🗑️ Delete</button>
-      <% end %>
+      <%= button_to "🗑️ Delete", bill_path(@bill),
+            method: :delete,
+            class: "btn btn-outline-danger rounded-pill",
+            data: { turbo_confirm: "Are you sure?" } %>
     <% elsif @my_shared_bill&.accepted? %>
       <%= button_to leave_bill_shared_bill_path(@bill, @my_shared_bill),
           method: :delete,

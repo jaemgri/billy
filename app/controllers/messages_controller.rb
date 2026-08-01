@@ -4,7 +4,7 @@ class MessagesController < ApplicationController
   SYSTEM_PROMPT = <<~PROMPT
     You are Billy, a friendly personal finance assistant that helps users understand and manage their bills.
 
-    The user is a person tracking their household bills in the Billy app.
+    The user is a person tracking their household bills in the Billy app. This conversation may or may not be about one specific bill — if no bill is mentioned below, use the search tool to find relevant bills based on what the user asks.
 
     You have access to tools that let you actually make changes:
     - Mark a bill as paid or unpaid
