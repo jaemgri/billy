@@ -29,7 +29,13 @@
                 <div>
                   <div class="d-flex align-items-center gap-2">
                     <span class="bill-name"><%= sb.bill.name %></span>
-                    <small>from <%= sb.bill.user.email %></small>
+                    <span class="bill-price">
+                      <%= number_to_currency(sb.split_amount || sb.bill.amount, unit: "¥", precision: 0) %>
+                    </span>
+                    <% if sb.split_amount.blank? %>
+                      <span class="category-pill">full amount</span>
+                    <% end %>
+                    <small>from <%= sb.bill.user.username.presence || sb.bill.user.email %></small>
                   </div>
                 </div>
 
