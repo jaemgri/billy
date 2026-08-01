@@ -1,3 +1,4 @@
 RubyLLM.configure do |config|
   config.gemini_api_key = ENV["GEMINI_API_KEY"]
+  config.default_model = "gemini-3.1-flash-lite"
 end
