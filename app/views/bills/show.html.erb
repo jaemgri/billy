@@ -123,14 +123,12 @@
           <span class="split-summary-label">Your remaining share</span>
           <span class="split-summary-value">¥<%= @bill.owner_remaining_amount.to_i %></span>
         </div>
-      </div>      <% if @bill.shared_bills.any? %>
+      </div>
 
-        <% @bill.shared_bills.each do |sb| %>
-
+      <% @bill.shared_bills.each do |sb| %>
           <div class="shared-user">
-
             <div class="shared-user-top">
-              <div>
+              <div class="w-75 text-truncate">
                 <strong><%= sb.user&.email || sb.invited_email %></strong><br>
                 <small><%= sb.user ? sb.status.capitalize : "Pending invitation" %></small>
               </div>
@@ -156,7 +154,6 @@
                 <% end %>
 
                 <small class="text-danger d-none" data-split-warning-target="warning"></small>
-              </div>
             </div>
 
               <%= button_to "",
@@ -164,18 +161,13 @@
                     method: :delete,
                     class: "remove-btn fa-solid fa-xmark",
                     data: { turbo_confirm: "Remove access?" } %>
-            </div>
+              </div>
 
           </div>
 
         <% end %>
-
-      <% else %>
-
+  <% else %>
         <p class="bill-value">This bill hasn't been shared yet.</p>
-
-      <% end %>
-
     </div>
 
   <% end %>
