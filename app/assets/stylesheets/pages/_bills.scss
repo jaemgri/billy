@@ -19,6 +19,7 @@
   padding: 24px 20px;
   display: flex;
   flex-direction: column;
+  min-width: 0;
   gap: 20px;
   background: #fff;
 
@@ -30,6 +31,7 @@
   flex-direction: column;
   gap: 6px;
   min-width: 0;
+  margin-bottom: 1em;
 
   label {
     font-size: 0.85rem;
@@ -38,9 +40,15 @@
   }
 }
 
+.remember-me {
+  margin-bottom: 1em;
+}
+
 .form-input {
   width: 100%;
-  padding: 10px 14px;
+  min-width: 0;
+  height: 44px;
+  padding: 0 14px;
   border: 1.5px solid var(--border);
   border-radius: 10px;
   background: var(--input-field);
@@ -55,8 +63,16 @@
 }
 
 textarea.form-input {
+  height: auto;
+  padding: 10px 14px;
   resize: vertical;
   min-height: 80px;
+}
+
+input[type="date"].form-input {
+  width: 1px;
+  min-width: 100%;
+  overflow: hidden;
 }
 
 select.form-input {
