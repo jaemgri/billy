@@ -110,14 +110,13 @@ select.form-input {
 .form-actions {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   gap: 16px;
 }
 
 .btn-submit-bill {
   display: block;
   width: fit-content;
-  margin: 0 auto;
   align-self: center;
   padding: 12px 40px;
   border: 2px solid var(--border);
@@ -261,10 +260,10 @@ justify-content: space-between;
   display: flex;
   flex-direction: column;
   gap: 14px;
-  padding: 16px 0;
 
   & + .shared-user {
     border-top: 1px solid var(--border);
+    padding-top: 1.2em;
   }
 }
 
