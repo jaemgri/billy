@@ -43,7 +43,7 @@
         </div>
       </div>
     <% end %>
-    
+
     <div class="col-12">
       <div class="dashboard-toolbar">
 
@@ -123,18 +123,17 @@
               <% end %>
 
               <!-- Toggle form kept separate from the link -->
-              <%= form_with model: bill, id: "edit_bill_#{bill.id}" do |f| %>
+              <div class="paid-button">
+              <%= form_with model: bill, url: root_path, method: :patch, id: "edit_bill_#{bill.id}", class: "form-align-right" do |f| %>
                 <div class="form-group-toggle">
-                  <div>
-                    <span class="toggle-label">Paid</span>
-                    <span class="toggle-sublabel">Mark this bill as paid</span>
-                  </div>
+                  <span class="toggle-label">Paid</span>
                   <label class="toggle-switch">
                     <%= f.check_box :paid, class: "toggle-input", onchange: "this.form.requestSubmit()" %>
                     <span class="toggle-track"></span>
                   </label>
                 </div>
               <% end %>
+              </div>
 
             </div>
 
