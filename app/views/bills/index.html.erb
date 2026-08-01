@@ -25,15 +25,15 @@
 
           <% pending_invites.each do |sb| %>
             <div class="dashboard-bill-card">
-              <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex flex-column justify-content-between align-items-center">
                 <div>
                   <div class="d-flex align-items-center gap-2">
                     <span class="bill-name"><%= sb.bill.name %></span>
+                    <small>from <%= sb.bill.user.email %></small>
                   </div>
-                  <small>from <%= sb.bill.user.email %></small>
                 </div>
 
-                <div class="d-flex gap-2">
+                <div class="w-100 mt-3 justify-content-around d-flex gap-2">
                   <%= button_to "Accept", accept_bill_shared_bill_path(sb.bill, sb), method: :patch, class: "action-btn" %>
                   <%= button_to "Ignore", leave_bill_shared_bill_path(sb.bill, sb), method: :delete, class: "action-btn delete", data: { turbo_confirm: "Ignore this invite?" } %>
                 </div>
