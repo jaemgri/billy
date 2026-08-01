@@ -43,27 +43,12 @@
         </div>
       </div>
     <% end %>
-
-    <%# Page level toolbar %>
+    
     <div class="col-12">
       <div class="dashboard-toolbar">
 
-        <div class="d-flex align-items-center gap-2">
-          <%= form_with url: bills_path, method: :get, html: { class: "d-inline" } do %>
-            <input type="month"
-                   name="start_date"
-                   value="<%= @selected_month.strftime('%Y-%m') %>"
-                   onchange="this.form.requestSubmit()"
-                   class="form-input">
-          <% end %>
-
-          <% unless @selected_month.beginning_of_month == Date.today.beginning_of_month %>
-            <%= link_to "Today", bills_path, class: "filter-pill" %>
-          <% end %>
-        </div>
-
-        <div class="d-flex gap-2">
-          <% [["unpaid", "Unpaid"], ["all", "All"], ["paid", "Paid"]].each do |value, label| %>
+        <div class="d-flex gap-2 justify-content-around">
+          <% [["all", "All"], ["unpaid", "Unpaid"], ["paid", "Paid"]].each do |value, label| %>
             <%= link_to label,
                   bills_path(request.query_parameters.merge(paid_filter: value)),
                   class: "filter-pill #{"active" if @paid_filter == value}" %>
@@ -96,6 +81,9 @@
       </div>
 
     <!-- Bills -->
+        <%# Page level toolbar %>
+
+
     <div class="col-12 col-lg-4">
 
       <div class="dashboard-card mb-2">
@@ -201,7 +189,7 @@
             <% @category_breakdown.each_with_index do |(cat, amt), i| %>
               <%= link_to bills_by_category_path(category: cat), class: "category-legend-item text-decoration-none" do %>
                 <span class="legend-swatch" style="background: <%= colors[i % colors.length] %>;"></span>
-                <span class="legend-label"><%= cat %></span>
+                <span class="legend-label"><%= cat.capitalize %></span>
                 <span class="legend-amount"><%= number_to_currency(amt, unit: "¥", precision: 0) %></span>
               <% end %>
             <% end %>

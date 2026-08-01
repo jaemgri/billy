@@ -80,6 +80,45 @@
   text-align: center;
 }
 
+.calendar-title-form {
+  text-align: center;
+  margin: 0;
+}
+
+.calendar-title-picker {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.calendar-title-icon {
+  width: 18px;
+  height: 18px;
+  color: #a0aec0;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.calendar-title-picker:hover .calendar-title-icon {
+  color: #6a73e6;
+}
+
+.calendar-title-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  opacity: 0;
+  cursor: pointer;
+}
+
 .simple-calendar .calendar-heading nav {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

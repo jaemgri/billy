@@ -2,16 +2,24 @@
 // Global
 // ==========================
 
+html, body {
+  width: 100%;
+  overflow-x: hidden; /* 横スクロール（はみ出し）を防止 */
+}
 
 body {
   background-color: var(--app-bg);
   margin: 0;
-  background-color: var(--app-bg);
   padding-bottom: 80px;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
+/* すべての要素で padding や border を幅に含める設定 */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 
 // ==========================
 // Header
@@ -23,32 +31,31 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 12px 20px;
-
   background: white;
   border-bottom: 1px solid var(--border);
-
   position: sticky;
   top: 0;
   z-index: 100;
+  width: 100%; /* ヘッダー幅を固定 */
 }
-
 
 .header-title {
   margin: 0;
-
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--main-accent);
 }
-
 
 .header-right {
   display: flex;
   align-items: center;
   gap: 12px;
   color: var(--subtitles);
-}
 
+  form {
+    margin: 0;
+  }
+}
 
 .billy-icon {
   width: 60px;
@@ -56,11 +63,13 @@ body {
   object-fit: contain;
 }
 
+/* ％指定から固定サイズに変更して崩れを防止 */
 .billy-card-img {
-  width: 10%;
-  height: 100%;
+  width: 40px;
+  height: 40px;
   object-fit: contain;
   border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .chat-card-icon {
@@ -69,443 +78,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-// ==========================
-// Dashboard Layout
-// ==========================
-
-.bills-index {
-  padding: 0 16px;
-}
-
-
-.dashboard-card,
-.calendar-card {
-  background: white;
-
-  border: 2px solid var(--border);
-  border-radius: 28px;
-
-  padding: 24px;
-
-  box-shadow: 0 12px 30px rgba(0,0,0,.05);
-}
-
-
-.calendar-card {
-  border-radius: 36px;
-}
-
-
-// ==========================
-// Calendar
-// ==========================
-
-.cal-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 14px 4px;
-}
-
-
-.cal-month-label {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-dark);
-}
-
-
-.cal-nav-arrow {
-  color: var(--subtitles);
-  text-decoration: none;
-
-  &:hover {
-    color: var(--main-accent);
-  }
-}
-
-
-.day {
-  min-width: 40px;
-  max-width: 40px;
-}
-
-
-.day-number {
-  font-size: .85rem;
-  font-weight: 600;
-  color: var(--text-dark);
-}
-
-
-.calendar-badge {
-  width: 22px;
-  height: 22px;
-
-  border-radius: 50%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: var(--main-accent);
-  color: white;
-
-  font-size: .75rem;
-  font-weight: 700;
-}
-
-
-// ==========================
-// Bills Cards
-// ==========================
-
-.bill-card {
-  background: white;
-
-  border-radius: 24px;
-
-  padding: 18px 22px;
-
-  box-shadow: 0 4px 12px rgba(0,0,0,.05);
-
-  transition: .25s ease;
-
-
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 24px rgba(0,0,0,.08);
-  }
-}
-
-
-.dashboard-bill-card {
-  padding: 18px;
-
-  border: 2px solid var(--border);
-  border-radius: 20px;
-
-  margin-bottom: 14px;
-
-  transition: .25s ease;
-
-  &:hover {
-    transform: translateY(-3px);
-    border-color: var(--main-accent);
-  }
-}
-
-
-.bill-name {
-  font-size: .9rem;
-  font-weight: 600;
-
-  color: var(--text-dark);
-}
-
-
-.bill-price {
-  font-size: 1.3rem;
-  font-weight: 700;
-
-  color: var(--text-dark);
-}
-
-
-.category-pill {
-  background: rgba(244,162,97,.15);
-
-  color: var(--main-accent);
-
-  padding: 4px 12px;
-
-  border-radius: 999px;
-
-  font-size: .75rem;
-  font-weight: 600;
-}
-
-
-// ==========================
-// Dashboard Header
-// ==========================
-
-.dashboard-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-
-
-  h3 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin: 0;
-  }
-
-
-  span {
-    color: var(--subtitles);
-    font-size: .85rem;
-  }
-}
-
-
-.dashboard-total {
-
-  margin-top: 24px;
-  padding-top: 20px;
-
-  border-top: 2px solid var(--border);
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-
-  strong {
-    color: var(--main-accent);
-    font-size: 1.5rem;
-  }
-}
-
-
-// ==========================
-// Buttons
-// ==========================
-
-.btn-ask-billy {
-  width: 100%;
-  padding: 14px;
-
-
-  background: var(--main-accent);
-  color: white;
-
-
-  border-radius: 999px;
-  border: none;
-
-
-  font-weight: 600;
-
-  transition: .25s ease;
-
-
-  &:hover {
-    transform: scale(1.03);
-    opacity: .9;
-  }
-}
-
-
-// ==========================
-// Empty States
-// ==========================
-
-.no-bills-msg {
-  text-align: center;
-
-  color: var(--subtitles);
-
-  font-size: .9rem;
-
-  margin: 20px 0;
-
-}
-
-.dashboard-bill-card {
-  transition: all .25s ease;
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0,0,0,.08);
-    border-color: var(--main-accent);
-  }
-}
-
-.sidebar{
-    background: var(--card-bg);
-    border-radius:36px;
-}
-
-.header-title {
-  color: var(--main-accent);
-}
-
-
-.calendar-card,
-.dashboard-card {
-  background: var(--card-bg);
-  border: 2px solid var(--border);
-  border-radius: 28px;
-  padding: 24px;
-  box-shadow: 0 12px 30px rgba(0,0,0,.05);
-}
-
-.card-header-soft {
-  margin-bottom: 24px;
-
-  h2 {
-    margin-bottom: 4px;
-    font-weight: 700;
-  }
-
-  p {
-    color: var(--subtitles);
-    margin: 0;
-  }
-}
-
-.dashboard-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-
-  span {
-    color: var(--subtitles);
-    font-size: .85rem;
-  }
-}
-
-.dashboard-bill-card {
-  padding: 18px;
-  border: 2px solid var(--border);
-  border-radius: 20px;
-  margin-bottom: 14px;
-  transition: all .25s ease;
-
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 24px rgba(0,0,0,.08);
-  }
-}
-
-.category-pill {
-  background: rgba(244,162,97,.15);
-  color: var(--main-accent);
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: .75rem;
-  font-weight: 600;
-}
-
-.bill-price {
-  font-size: 1.3rem;
-  font-weight: 700;
-}
-
-.dashboard-total {
-  margin-top: 24px;
-  padding-top: 20px;
-  border-top: 2px solid var(--border);
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  strong {
-    color: green;
-    font-size: 1.5rem;
-  }
-}
-
-.calendar-badge {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: var(--main-accent);
-  color: white;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: .75rem;
-  font-weight: 700;
-}
-
-.dashboard-summary {
-  margin-top: 20px;
-  margin-bottom: 8px;
-  background: linear-gradient(
-    135deg,
-    var(--main-accent),
-    #ffb86b
-  );
-
-  color: white;
-  padding: 18px;
-  border-radius: 28px;
-  margin-bottom: 8px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-
-  h2 {
-    margin: 0;
-    font-size: 1.8rem;
-    font-weight: 700;
-  }
-
-  p {
-    margin: 8px 0 0;
-    opacity: 0.95;
-    font-size: 1rem;
-  }
-
-  strong {
-    font-size: 1.2rem;
-    color: white;
-  }
-}
-
-// Design for the view as date page
-
-.empty-state {
-  background: white;
-  border: 2px dashed var(--border);
-  border-radius: 24px;
-  padding: 48px 24px;
-  text-align: center;
-  color: var(--subtitles);
-
-  i {
-    font-size: 3rem;
-    color: var(--main-accent);
-    margin-bottom: 16px;
-  }
-
-  h4 {
-    color: var(--text-dark);
-    margin-bottom: 8px;
-  }
-
-  p {
-    margin: 0;
-  }
-}
-
-.dashboard-bill-card {
-  cursor: pointer;
-
-  &:hover {
-    transform: translateY(-4px);
-    border-color: var(--main-accent);
-    box-shadow: 0 12px 24px rgba(0,0,0,.08);
-  }
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  form {
-    margin: 0;
-  }
 }
 
 .header-signout-btn {
@@ -540,7 +112,264 @@ body {
   }
 }
 
-// category breakdown
+// ==========================
+// Dashboard Layout
+// ==========================
+
+.bills-index {
+  padding: 0 16px;
+  width: 100%; /* 全体幅にフィットさせる */
+  max-width: 600px; /* PCなどで開いた時に広がりすぎないように制限 */
+  margin: 0 auto;  /* 中央寄せ */
+}
+
+.sidebar {
+  background: var(--card-bg);
+  border-radius: 36px;
+}
+
+.calendar-card,
+.dashboard-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 28px;
+  padding: 24px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.05);
+}
+
+.calendar-card {
+  border-radius: 36px;
+}
+
+.card-header-soft {
+  margin-bottom: 24px;
+
+  h2 {
+    margin-bottom: 4px;
+    font-weight: 700;
+  }
+
+  p {
+    color: var(--subtitles);
+    margin: 0;
+  }
+}
+
+// ==========================
+// Calendar
+// ==========================
+
+.cal-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 4px;
+}
+
+.cal-month-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.cal-nav-arrow {
+  color: var(--subtitles);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--main-accent);
+  }
+}
+
+/* 固定値からフレキシブルな指定に変更 */
+.day {
+  flex: 1;
+  text-align: center;
+  min-width: 0; /* Flex内の崩れ防止 */
+}
+
+.day-number {
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.calendar-badge {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--main-accent);
+  color: white;
+  font-size: .75rem;
+  font-weight: 700;
+  margin: 0 auto;
+}
+
+// ==========================
+// Dashboard Header & Summary
+// ==========================
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  span {
+    color: var(--subtitles);
+    font-size: .85rem;
+  }
+}
+
+.dashboard-summary {
+  margin-top: 20px;
+  margin-bottom: 8px;
+  background: linear-gradient(
+    135deg,
+    var(--main-accent),
+    #ffb86b
+  );
+  color: white;
+  padding: 18px;
+  border-radius: 28px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+
+  h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 8px 0 0;
+    opacity: 0.95;
+    font-size: 1rem;
+  }
+
+  strong {
+    font-size: 1.2rem;
+    color: white;
+  }
+}
+
+// ==========================
+// Bills Cards
+// ==========================
+
+.bill-card {
+  background: white;
+  border-radius: 24px;
+  padding: 18px 22px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.05);
+  transition: .25s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0,0,0,.08);
+  }
+}
+
+.dashboard-bill-card {
+  padding: 18px;
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  margin-bottom: 14px;
+  cursor: pointer;
+  transition: all .25s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: var(--main-accent);
+    box-shadow: 0 12px 24px rgba(0,0,0,.08);
+  }
+}
+
+.bill-name {
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.bill-price {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.category-pill {
+  background: rgba(244,162,97,.15);
+  color: var(--main-accent);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: .75rem;
+  font-weight: 600;
+}
+
+.dashboard-total {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 2px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  strong {
+    color: green;
+    font-size: 1.5rem;
+  }
+}
+
+// ==========================
+// Toolbar & Filters
+// ==========================
+
+.dashboard-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 12px 20px;
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 999px;
+  margin-bottom: 8px;
+
+  @media (max-width: 576px) {
+    flex-direction: column;
+    align-items: stretch;
+    border-radius: 24px;
+    gap: 8px;
+  }
+}
+
+.filter-pill {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: inherit;
+  text-decoration: none;
+  font-size: 0.85rem;
+
+  &.active {
+    background: var(--main-accent);
+    color: white;
+    border-color: var(--main-accent);
+  }
+}
+
+// ==========================
+// Category Breakdown
+// ==========================
 
 .category-breakdown {
   display: flex;
@@ -548,7 +377,6 @@ body {
   align-items: center;
   gap: 1rem;
 }
-
 
 .category-donut {
   width: 140px;
@@ -609,39 +437,53 @@ body {
   .legend-amount { font-weight: 600; }
 }
 
-// Page-level toolbar
-.dashboard-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  padding: 12px 20px;
-  background: var(--card-bg);
-  border: 2px solid var(--border);
-  border-radius: 999px;
-  margin-bottom: 8px;
+// ==========================
+// Buttons & UI States
+// ==========================
 
-  @media (max-width: 576px) {
-    flex-direction: column;
-    align-items: stretch;
-    border-radius: 24px;
-    gap: 8px;
+.btn-ask-billy {
+  width: 100%;
+  padding: 14px;
+  background: var(--main-accent);
+  color: white;
+  border-radius: 999px;
+  border: none;
+  font-weight: 600;
+  transition: .25s ease;
+
+  &:hover {
+    transform: scale(1.03);
+    opacity: .9;
   }
 }
 
-// Filter pills
-.filter-pill {
-  padding: 0.25rem 0.75rem;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  color: inherit;
-  text-decoration: none;
-  font-size: 0.85rem;
+.no-bills-msg {
+  text-align: center;
+  color: var(--subtitles);
+  font-size: .9rem;
+  margin: 20px 0;
+}
 
-  &.active {
-    background: var(--main-accent);
-    color: white;
-    border-color: var(--main-accent);
+.empty-state {
+  background: white;
+  border: 2px dashed var(--border);
+  border-radius: 24px;
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--subtitles);
+
+  i {
+    font-size: 3rem;
+    color: var(--main-accent);
+    margin-bottom: 16px;
+  }
+
+  h4 {
+    color: var(--text-dark);
+    margin-bottom: 8px;
+  }
+
+  p {
+    margin: 0;
   }
 }
