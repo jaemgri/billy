@@ -124,7 +124,10 @@
 
               <!-- Toggle form kept separate from the link -->
               <div class="paid-button">
-              <%= form_with model: bill, url: root_path, method: :patch, id: "edit_bill_#{bill.id}", class: "form-align-right" do |f| %>
+              <%= form_with model: bill, url: bill_path(bill),
+                            method: :patch,
+                            id: "edit_bill_#{bill.id}",
+                            class: "form-align-right" do |f| %>
                 <div class="form-group-toggle">
                   <span class="toggle-label">Paid</span>
                   <label class="toggle-switch">
