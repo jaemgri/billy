@@ -1,18 +1,14 @@
 <div class="container py-1">
-
   <div class="row g-2">
-
     <%# unpaid/paid/all filter %>
     <% filter_label = { "unpaid" => "Unpaid only", "paid" => "Paid only", "all" => "Paid + Unpaid" }[@paid_filter] %>
     <% total_label  = { "unpaid" => "Total unpaid", "paid" => "Total paid", "all" => "Total (paid + unpaid)" }[@paid_filter] %>
-
     <div class="dashboard-summary">
       <div>
         <h2>Hello, <%= current_user.username %>👋</h2>
         <p>You have <strong><%= @due_this_month.count %></strong> bill(s) due in <%= @selected_month.strftime("%B") %> (<%= @paid_filter %>).</p>
       </div>
     </div>
-
     <!-- Pending Invites -->
     <% pending_invites = current_user.shared_bills.pending %>
     <% if pending_invites.any? %>
@@ -22,23 +18,39 @@
             <h3>📨 Shared Bill Requests</h3>
             <span><%= pending_invites.count %> Invite(s)</span>
           </div>
-
           <% pending_invites.each do |sb| %>
-            <div class="dashboard-bill-card">
+            <div class="dashboard-bill-card position-relative">
               <div class="d-flex flex-column justify-content-between align-items-center">
                 <div>
-                  <div class="d-flex align-items-center gap-2">
-                    <span class="bill-name"><%= sb.bill.name %></span>
-                    <span class="bill-price">
-                      <%= number_to_currency(sb.split_amount || sb.bill.amount, unit: "¥", precision: 0) %>
-                    </span>
+                  <div class="d-flex align-items-center gap-2 flex-column">
+                    <div>
+                      <span class="bill-name"><%= sb.bill.name %></span>
+                      <span class="bill-price">
+
+                        <%= number_to_currency(sb.split_amount || sb.bill.amount, unit: "¥", precision: 0) %>
+                      </span>
+                    </div>
                     <% if sb.split_amount.blank? %>
-                      <span class="category-pill">full amount</span>
+                      <span class="position-absolute translate-middle badge bg-info" style="
+    top: 50%;
+    left: 4.3%;
+    /* border-radius: inherit; */
+    border-radius: 20px 0 0 20px;
+    height: 100%;
+    width: 30px;
+    overflow: clip;
+    overflow-wrap: anywhere;
+    text-wrap: auto;
+    text-orientation: upright;
+    writing-mode: sideways-lr;
+">
+                        Full
+                        amount<span class="visually-hidden">unread messages</span>
+                      </span>
                     <% end %>
                     <small>from <%= sb.bill.user.username.presence || sb.bill.user.email %></small>
                   </div>
                 </div>
-
                 <div class="w-100 mt-3 justify-content-around d-flex gap-2">
                   <%= button_to "Accept", accept_bill_shared_bill_path(sb.bill, sb), method: :patch, class: "action-btn" %>
                   <%= button_to "Ignore", leave_bill_shared_bill_path(sb.bill, sb), method: :delete, class: "action-btn delete", data: { turbo_confirm: "Ignore this invite?" } %>
@@ -49,10 +61,8 @@
         </div>
       </div>
     <% end %>
-
     <div class="col-12">
       <div class="dashboard-toolbar">
-
         <div class="d-flex gap-2 justify-content-around">
           <% [["all", "All"], ["unpaid", "Unpaid"], ["paid", "Paid"]].each do |value, label| %>
             <%= link_to label,
@@ -60,19 +70,14 @@
                   class: "filter-pill #{"active" if @paid_filter == value}" %>
           <% end %>
         </div>
-
       </div>
     </div>
-
     <!-- Calendar -->
     <div class="col-12 col-lg-8">
       <div class="calendar-card">
-
         <%= month_calendar(events: @bills, attribute: :due_date, start_date: @selected_month) do |date, bills| %>
           <%= link_to "/bills/date/#{date}", class: "calendar-day text-decoration-none" do %>
-
             <div class="day-number"><%= date.day %></div>
-
             <div class="bill-list">
               <% if bills.any? %>
                 <div class="calendar-badge">
@@ -82,29 +87,19 @@
             </div>
           <% end %>
         <% end %>
-
-        </div>
       </div>
-
+    </div>
     <!-- Bills -->
-        <%# Page level toolbar %>
-
-
+    <%# Page level toolbar %>
     <div class="col-12 col-lg-4">
-
       <div class="dashboard-card mb-2">
-
         <div class="dashboard-header">
           <h3>💸 Due in <%= @selected_month.strftime("%B %Y") %></h3>
           <span><%= @due_this_month.count %> Bill(s)</span>
         </div>
-
         <% if @due_this_month.any? %>
-
           <% @due_this_month.each do |bill| %>
-
             <div class="dashboard-bill-card">
-
               <!-- Clickable details row -->
               <%= link_to bill_path(bill), class: "text-decoration-none text-reset" do %>
                 <div class="d-flex justify-content-between align-items-center mb-2">
@@ -121,90 +116,78 @@
                       Due <%= bill.due_date.strftime("%b %d") %>
                     </small>
                   </div>
-
                   <div class="bill-price">
                     <%= number_to_currency(bill.amount_for(current_user).to_i, unit: "¥", precision: 0) %>
                   </div>
                 </div>
               <% end %>
-
-              <!-- Toggle form kept separate from the link -->
-              <div class="paid-button">
-              <%= form_with model: bill, url: bill_path(bill),
-                            method: :patch,
-                            id: "edit_bill_#{bill.id}",
-                            class: "form-align-right" do |f| %>
+              <div class="paid-button d-flex justify-content-end">
                 <div class="form-group-toggle">
                   <span class="toggle-label">Paid</span>
                   <label class="toggle-switch">
-                    <%= f.check_box :paid, class: "toggle-input", onchange: "this.form.requestSubmit()" %>
+                    <%= check_box_tag :paid, "1", bill.paid,
+            class: "toggle-input",
+            onchange: "fetch('#{bill_path(bill)}', {
+              method: 'PATCH',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': document.querySelector('meta[name=csrf-token]').content
+              },
+              body: JSON.stringify({ bill: { paid: this.checked } })
+            })" %>
                     <span class="toggle-track"></span>
                   </label>
                 </div>
-              <% end %>
               </div>
-
             </div>
-
           <% end %>
-
         <% else %>
-
           <div class="empty-state">
             🎉 No bills due this month!
           </div>
-
         <% end %>
-
         <div class="dashboard-total">
-
           <span><%= total_label %></span>
           <strong>
             <%= number_to_currency(@due_this_month.sum { |bill| bill.amount_for(current_user) }, unit: "¥", precision: 0) %>
           </strong>
-
         </div>
-
       </div>
-
-    <!-- Category Breakdown -->
-    <% if @category_breakdown.present? %>
-      <% total = @category_breakdown.values.sum.to_f %>
-      <% colors = ["#FF6B6B", "#4ECDC4", "#FFD93D", "#6C5CE7", "#1DD1A1", "#FF9F43", "#54A0FF", "#EE5A6F"] %>
-      <% cumulative = 0 %>
-      <% stops = @category_breakdown.each_with_index.map do |(cat, amt), i|
+      <!-- Category Breakdown -->
+      <% if @category_breakdown.present? %>
+        <% total = @category_breakdown.values.sum.to_f %>
+        <% colors = ["#FF6B6B", "#4ECDC4", "#FFD93D", "#6C5CE7", "#1DD1A1", "#FF9F43", "#54A0FF", "#EE5A6F"] %>
+        <% cumulative = 0 %>
+        <% stops = @category_breakdown.each_with_index.map do |(cat, amt), i|
           start_pct = total.zero? ? 0 : (cumulative / total * 100).round(2)
           cumulative += amt
           end_pct = total.zero? ? 0 : (cumulative / total * 100).round(2)
           "#{colors[i % colors.length]} #{start_pct}% #{end_pct}%"
         end.join(", ") %>
-
-      <div class="dashboard-card">
-        <div class="dashboard-header">
-          <h3>🥧 <%= @selected_month.strftime("%B %Y") %> Usage by Category</h3>
-          <span><%= filter_label %></span>
-        </div>
-
-        <div class="category-breakdown">
-          <div class="category-donut" style="background: conic-gradient(<%= stops %>);">
-            <div class="category-donut-center">
-              <span class="donut-total"><%= number_to_currency(total, unit: "¥", precision: 0) %></span>
-              <span class="donut-caption"><%= @category_breakdown.size %> categories</span>
+        <div class="dashboard-card">
+          <div class="dashboard-header">
+            <h3>🥧 <%= @selected_month.strftime("%B %Y") %> Usage by Category</h3>
+            <span><%= filter_label %></span>
+          </div>
+          <div class="category-breakdown">
+            <div class="category-donut" style="background: conic-gradient(<%= stops %>);">
+              <div class="category-donut-center">
+                <span class="donut-total"><%= number_to_currency(total, unit: "¥", precision: 0) %></span>
+                <span class="donut-caption"><%= @category_breakdown.size %> categories</span>
+              </div>
+            </div>
+            <div class="category-legend">
+              <% @category_breakdown.each_with_index do |(cat, amt), i| %>
+                <%= link_to bills_by_category_path(category: cat), class: "category-legend-item text-decoration-none" do %>
+                  <span class="legend-swatch" style="background: <%= colors[i % colors.length] %>;"></span>
+                  <span class="legend-label"><%= cat.capitalize %></span>
+                  <span class="legend-amount"><%= number_to_currency(amt, unit: "¥", precision: 0) %></span>
+                <% end %>
+              <% end %>
             </div>
           </div>
-
-          <div class="category-legend">
-            <% @category_breakdown.each_with_index do |(cat, amt), i| %>
-              <%= link_to bills_by_category_path(category: cat), class: "category-legend-item text-decoration-none" do %>
-                <span class="legend-swatch" style="background: <%= colors[i % colors.length] %>;"></span>
-                <span class="legend-label"><%= cat.capitalize %></span>
-                <span class="legend-amount"><%= number_to_currency(amt, unit: "¥", precision: 0) %></span>
-              <% end %>
-            <% end %>
-          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
     </div>
   </div>
 </div>
