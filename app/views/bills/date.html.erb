@@ -1,4 +1,6 @@
-<div class="d-flex justify-content-center m-3">
-  <h2>📅 Bills Due</h2>
+<div class="bills-index">
+  <div class="d-flex justify-content-center m-3">
+    <h2>📅 Bills Due</h2>
+  </div>
+  <%= render "shared/bill_list", bills: @bills %>
 </div>
-<%= render "shared/bill_list", bills: @bills %>

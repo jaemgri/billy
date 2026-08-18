@@ -86,23 +86,23 @@
 
 .wing-left {
   right: 100%;
+  transform: translateY(-50%) scale(0.4) scaleX(-1);
 }
 
 .wing-right {
   left: 100%;
-  transform: translateY(-50%) scale(0.4) scaleX(-1);
 }
 
 @keyframes wing-flap-left {
-  0%   { opacity: 0; transform: translateY(-50%) scale(0.4) rotate(15deg); }
-  40%  { opacity: 1; transform: translateY(-65%) scale(1.15) rotate(-15deg); }
-  100% { opacity: 1; transform: translateY(-55%) scale(1) rotate(0deg); }
+  0%   { opacity: 0; transform: translateY(-50%) scale(0.4) scaleX(-1) rotate(15deg); }
+  40%  { opacity: 1; transform: translateY(-65%) scale(1.15) scaleX(-1) rotate(-15deg); }
+  100% { opacity: 1; transform: translateY(-55%) scale(1) scaleX(-1) rotate(0deg); }
 }
 
 @keyframes wing-flap-right {
-  0%   { opacity: 0; transform: translateY(-50%) scale(0.4) scaleX(-1) rotate(-15deg); }
-  40%  { opacity: 1; transform: translateY(-65%) scale(1.15) scaleX(-1) rotate(15deg); }
-  100% { opacity: 1; transform: translateY(-55%) scale(1) scaleX(-1) rotate(0deg); }
+  0%   { opacity: 0; transform: translateY(-50%) scale(0.4) rotate(-15deg); }
+  40%  { opacity: 1; transform: translateY(-65%) scale(1.15) rotate(15deg); }
+  100% { opacity: 1; transform: translateY(-55%) scale(1) rotate(0deg); }
 }
 
 .nav-item:hover .wing-left,

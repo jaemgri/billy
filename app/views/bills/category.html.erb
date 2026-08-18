@@ -1,9 +1,11 @@
-<div class="d-flex justify-content-center m-3">
-  <h2>Bills in category: <%= @category %></h2>
-</div>
+<div class="bills-index">
+  <div class="d-flex justify-content-center m-3">
+    <h2>Bills in category: <%= @category %></h2>
+  </div>
 
-<% if @bills.any? %>
- <%= render "shared/bill_list", bills: @bills %>
-<% else %>
-  <p class="text-muted fst-italic text-center">No bills in this category.</p>
-<% end %>
+  <% if @bills.any? %>
+   <%= render "shared/bill_list", bills: @bills %>
+  <% else %>
+    <p class="text-muted fst-italic text-center">No bills in this category.</p>
+  <% end %>
+</div>
